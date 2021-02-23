@@ -15,15 +15,15 @@ namespace GameOfLife.Console.Test
         }
 
         [TestMethod]
-        public void CanCreateGridWithDefaultValues()
+        public void CanCreateGridWithInterchangingValues()
         {
-            var x = 25;
-            var y = 15;
-            var grid = new GameGrid(x, y);
+            var gridWidth = 25;
+            var gridHeight = 15;
+            var grid = new GameGrid(gridWidth, gridHeight);
            
 
-            Assert.AreEqual(x, grid.Width);
-            Assert.AreEqual(y, grid.Height);
+            Assert.AreEqual(gridWidth, grid.Width);
+            Assert.AreEqual(gridHeight, grid.Height);
         }
 
 
