@@ -26,6 +26,18 @@ namespace GameOfLife.Console.Test
             Assert.AreEqual(gridHeight, grid.Height);
         }
 
+        [TestMethod]
+        public void whenHeightAndWidthInputtedAnArrayListOfLengthHeightWithArraysOfLengthWidthCreated()
+        {
+            var grid = new GameGrid(2, 3);
+
+            int[,] newGrid = grid.CreateGrid(grid.Height, grid.Width);
+
+            int[,] expectedValue = { { 0, 0 }, { 0, 0 }, { 0, 0 } };
+
+            CollectionAssert.AreEqual(newGrid, expectedValue);
+        }
+
 
 
     }

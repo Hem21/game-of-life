@@ -22,16 +22,22 @@ namespace GameOfLife.Console
             this.Height = gridHeight;
         }
 
-        public int getWidth()
+        public int GetWidth()
         {
             return Width;
         }
 
-        public int getHeight()
+        public int GetHeight()
         {
             return Height;
         }
-       
 
+        public int[,] CreateGrid(int height, int width)
+        {
+
+            int[,] newGrid = new int[height,width];
+
+            return newGrid;
+        }
     }
 }
