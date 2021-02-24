@@ -27,7 +27,7 @@ namespace GameOfLife.Console.Test
         }
 
         [TestMethod]
-        public void whenHeightAndWidthInputtedAnArrayListOfLengthHeightWithArraysOfLengthWidthCreated()
+        public void WhenHeightAndWidthInputtedAnArrayListOfLengthHeightWithArraysOfLengthWidthCreated()
         {
             var grid = new GameGrid(2, 3);
 

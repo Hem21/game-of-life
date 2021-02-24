@@ -34,10 +34,7 @@ namespace GameOfLife.Console
 
         public int[,] CreateGrid(int height, int width)
         {
-
-            int[,] newGrid = new int[height,width];
-
-            return newGrid;
+            return new int[height,width];
         }
     }
 }
