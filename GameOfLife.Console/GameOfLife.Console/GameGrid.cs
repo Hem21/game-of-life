@@ -22,16 +22,6 @@ namespace GameOfLife.Console
             this.YAxis = yAxis;
         }
 
-        public int GetXAxis()
-        {
-            return XAxis;
-        }
-
-        public int GetYAxis()
-        {
-            return YAxis;
-        }
-
         public bool[,] CreateGrid(int xAxis, int yAxis)
         {
             return new bool[xAxis, yAxis];
@@ -48,13 +38,13 @@ namespace GameOfLife.Console
             var GridX = grid.GetLength(0);
             var GridY = grid.GetLength(1);
 
-            for (int i = 0; i < GridX; i++)
+            for (int column = 0; column < GridX; column++)
             {
-                for (int j = 0; j < GridY; j++)
+                for (int row = 0; row < GridY; row++)
                 {
-                    if ((CellX == i) && (CellY == j))
+                    if ((CellX == column) && (CellY == row))
                     {
-                        grid[i, j] = CellStatus;
+                        grid[column, row] = CellStatus;
                         break;
                     }
                 }
