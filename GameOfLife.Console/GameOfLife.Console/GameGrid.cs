@@ -7,34 +7,61 @@ namespace GameOfLife.Console
     public class GameGrid
     {
 
-        public int Width;
-        public int Height;
+        public int XAxis;
+        public int YAxis;
 
         public GameGrid()
         {
-            this.Width = 5;
-            this.Height = 5;
+            this.XAxis = 5;
+            this.YAxis = 5;
         }
 
-        public GameGrid(int gridWidth, int gridHeight)
+        public GameGrid(int xAxis, int yAxis)
         {
-            this.Width = gridWidth;
-            this.Height = gridHeight;
+            this.XAxis = xAxis;
+            this.YAxis = yAxis;
         }
 
-        public int GetWidth()
+        public int GetXAxis()
         {
-            return Width;
+            return XAxis;
         }
 
-        public int GetHeight()
+        public int GetYAxis()
         {
-            return Height;
+            return YAxis;
         }
 
-        public int[,] CreateGrid(int height, int width)
+        public bool[,] CreateGrid(int xAxis, int yAxis)
         {
-            return new int[height,width];
+            return new bool[xAxis, yAxis];
+        }
+
+        public bool[,] SetGrid(int xAxis, int yAxis, Cell NewCell)
+        {
+            var grid = CreateGrid(xAxis, yAxis);
+
+            var CellX = NewCell.GetCellXPosition();
+            var CellY = NewCell.GetCellYPosition();
+            var CellStatus = NewCell.GetCellStatus();
+
+            var GridX = grid.GetLength(0);
+            var GridY = grid.GetLength(1);
+
+            for (int i = 0; i < GridX; i++)
+            {
+                for (int j = 0; j < GridY; j++)
+                {
+                    if ((CellX == i) && (CellY == j))
+                    {
+                        grid[i, j] = CellStatus;
+                        break;
+                    }
+                }
+            
+            }
+            
+            return grid;        
         }
     }
 }

@@ -10,20 +10,20 @@ namespace GameOfLife.Console.Test
         {
             var grid = new GameGrid();
 
-            Assert.AreEqual(5, grid.Width);
-            Assert.AreEqual(5, grid.Height);
+            Assert.AreEqual(5, grid.XAxis);
+            Assert.AreEqual(5, grid.YAxis);
         }
 
         [TestMethod]
         public void CanCreateGridWithInterchangingValues()
         {
-            var gridWidth = 25;
-            var gridHeight = 15;
-            var grid = new GameGrid(gridWidth, gridHeight);
+            var xAxis = 25;
+            var yAxis = 15;
+            var grid = new GameGrid(xAxis, yAxis);
            
 
-            Assert.AreEqual(gridWidth, grid.Width);
-            Assert.AreEqual(gridHeight, grid.Height);
+            Assert.AreEqual(xAxis, grid.XAxis);
+            Assert.AreEqual(yAxis, grid.YAxis);
         }
 
         [TestMethod]
@@ -31,14 +31,34 @@ namespace GameOfLife.Console.Test
         {
             var grid = new GameGrid(2, 3);
 
-            int[,] newGrid = grid.CreateGrid(grid.Height, grid.Width);
+            bool[,] newGrid = grid.CreateGrid(grid.XAxis, grid.YAxis);
 
-            int[,] expectedValue = { { 0, 0 }, { 0, 0 }, { 0, 0 } };
+            bool[,] expectedGrid = { { false, false, false }, { false, false, false } };
 
-            CollectionAssert.AreEqual(newGrid, expectedValue);
+            CollectionAssert.AreEqual(newGrid, expectedGrid);
         }
 
+        [TestMethod]
+        public void WhenWidthAndHeightAreGivenCellIsCreated()
+        {
+            var cell = new Cell(1, 2, false);
 
+            Assert.IsNotNull(cell);
+        }
+
+        [TestMethod]
+        public void WhenCellIsCreatedThenLiveCellIsAddedToGridAndTrueReturned()
+        {
+            var grid = new GameGrid(2, 3);
+
+            var NewCell = new Cell(1, 1, true);
+
+            bool[,] initialGrid = grid.SetGrid(grid.XAxis, grid.YAxis, NewCell);
+
+            bool expectedValue = true;
+
+            Assert.AreEqual(initialGrid[1,1], expectedValue);
+        }
 
     }
 }
