@@ -37,7 +37,7 @@ namespace GameOfLife.Console
             return new bool[xAxis, yAxis];
         }
 
-        public bool[,] SetGrid(int xAxis, int yAxis, Cell NewCell)
+        public bool[,] SetCell(int xAxis, int yAxis, Cell NewCell)
         {
             var grid = CreateGrid(xAxis, yAxis);
 

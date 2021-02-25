@@ -53,7 +53,7 @@ namespace GameOfLife.Console.Test
 
             var NewCell = new Cell(1, 1, true);
 
-            bool[,] initialGrid = grid.SetGrid(grid.XAxis, grid.YAxis, NewCell);
+            bool[,] initialGrid = grid.SetCell(grid.XAxis, grid.YAxis, NewCell);
 
             bool expectedValue = true;
 
