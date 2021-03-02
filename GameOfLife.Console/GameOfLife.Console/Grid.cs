@@ -24,7 +24,7 @@ namespace GameOfLife.Console
                 case Status.Alive:
                     return "A";
                 default:
-                    throw new Exception("Inavlid State");
+                    throw new Exception("Invalid State");
             }
         }
 

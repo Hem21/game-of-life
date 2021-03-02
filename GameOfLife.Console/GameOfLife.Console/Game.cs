@@ -40,36 +40,56 @@ namespace GameOfLife.Console
             int.TryParse(Parts[0], out int row);
             int.TryParse(Parts[1], out int column);
 
-            if (row < 1 || row > grid.GetLength(0) || column < 1 || column > grid.GetLength(1)) {
+            if (row < 0 || row > grid.GetLength(0) || column < 0 || column > grid.GetLength(1)) {
                 return false;
             }
 
-            grid[row - 1, column - 1] = new Grid(setAlive);
+            grid[row, column] = new Grid(setAlive);
             return true;
         }
 
-        public void SetGrid()
+        public Grid[,] SetGridSize()
         {
-
             System.Console.WriteLine("Enter row length and column number (e.g 3,4) to create grid");
 
             string PlayerInput = System.Console.ReadLine();
             string[] Parts = PlayerInput.Split(',');
             int.TryParse(Parts[0], out int row);
             int.TryParse(Parts[1], out int column);
-            Status setAlive = Status.Alive;
 
             var grid = CreateGrid(row, column);
 
-            bool newCell = true;
+            return grid;
+        }
 
-            while (newCell) {
-                DisplayGrid(grid);
-                newCell = SetCell(setAlive, grid);
-                if (!newCell) {
+        public void SetGrid()
+        {
+
+            var newGrid = SetGridSize();
+            Status setAlive = Status.Alive;
+
+            bool @continue = true;
+            while (@continue)
+            {
+                DisplayGrid(newGrid);
+
+                System.Console.Write("Write 'Start' if you want to start the game or 'Add' if you want to continue adding cells >");
+                string playerInput = System.Console.ReadLine();
+
+                if (playerInput.Equals("Start"))
+                {
                     return;
                 }
+                else if (playerInput.Equals("Add"))
+                {
+                    @continue = SetCell(setAlive, newGrid);
+                }
+                else
+                {
+                    throw new Exception("This command doesn't exist, try again");
+                }
             }
+
         }
 
     }

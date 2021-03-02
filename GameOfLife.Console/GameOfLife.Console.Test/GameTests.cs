@@ -6,7 +6,7 @@ namespace GameOfLife.Console.Test
     public class GameTests
     { 
         [TestMethod]
-        public void CanCreateGridWithInterchangingValues()
+        public void CanCreateGameGridWithInterchangingValues()
         {
             var xAxis = 25;
             var yAxis = 15;
@@ -16,6 +16,24 @@ namespace GameOfLife.Console.Test
            
             Assert.AreEqual(xAxis, grid.GetLength(0));
             Assert.AreEqual(yAxis, grid.GetLength(1));
+        }
+
+        [TestMethod]
+        public void CanCreateNewGrid()
+        {
+            var grid = new Grid();
+
+            Assert.IsNotNull(grid);
+        }
+
+        [TestMethod]
+        public void CanCreateNewGridWithDeadStatus()
+        {
+
+            var status = Status.Dead;
+            var grid = new Grid(status);
+
+            //Assert.Equals(Status.Dead, );
         }
     }
 }

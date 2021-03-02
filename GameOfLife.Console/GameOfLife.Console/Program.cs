@@ -10,6 +10,7 @@ namespace GameOfLife.Console
             Game game = new Game();
 
             game.SetGrid();
+
         }
     }
 }
