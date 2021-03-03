@@ -7,12 +7,12 @@ namespace GameOfLife.Console
     public class Game
     {
 
-        public Grid[,] CreateGrid(int xAxis, int yAxis)
-        { 
-            return new Grid[xAxis, yAxis];
+        public Cell[,] CreateGrid(int xAxis, int yAxis)
+        {
+            return new Cell[xAxis, yAxis];
         }
 
-        public void DisplayGrid(Grid[,] grid)
+        public void DisplayGrid(Cell[,] grid)
         {
 
             var row = grid.GetLength(0);
@@ -29,7 +29,7 @@ namespace GameOfLife.Console
         }
 
 
-        public bool SetCell(Status setAlive, Grid[,] grid)
+        public bool SetCell(Status setAlive, Cell[,] grid)
         {
 
             System.Console.WriteLine("Enter row and column number (e.g 3,4) to select live cell");
@@ -40,15 +40,16 @@ namespace GameOfLife.Console
             int.TryParse(Parts[0], out int row);
             int.TryParse(Parts[1], out int column);
 
-            if (row < 0 || row > grid.GetLength(0) || column < 0 || column > grid.GetLength(1)) {
+            if (row < 0 || row > grid.GetLength(0) || column < 0 || column > grid.GetLength(1))
+            {
                 return false;
             }
 
-            grid[row, column] = new Grid(setAlive);
+            grid[row, column] = new Cell(setAlive);
             return true;
         }
 
-        public Grid[,] SetGridSize()
+        public Cell[,] SetGridSize()
         {
             System.Console.WriteLine("Enter row length and column number (e.g 3,4) to create grid");
 
@@ -90,6 +91,24 @@ namespace GameOfLife.Console
                 }
             }
 
+        }
+
+        public Cell[,] StaysAlive(Cell[,] grid)
+        {
+
+            //checking row
+            for (int i = 0; i < grid.GetLength(0); i++)
+            {
+                for (int j = 0; j < grid.GetLength(1); j++)
+                {
+                    if (grid[i, j].Equals("A") && (grid[i + 1, j].Equals("A")))
+                    {
+                        grid.SetValue("D", i);
+                    }
+                }
+            }
+
+            return grid;
         }
 
     }
