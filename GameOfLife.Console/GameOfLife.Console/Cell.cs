@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GameOfLife.Console
 {
     public enum Status { Dead = 0, Alive }
 
-    public struct Grid
+    public struct Cell
     {
         public Status SetAlive { get; }
 
-        public Grid(Status setAlive)
+        public Cell(Status setAlive)
         {
             this.SetAlive = setAlive;
         }
@@ -24,10 +22,8 @@ namespace GameOfLife.Console
                 case Status.Alive:
                     return "A";
                 default:
-                    throw new Exception("Invalid State");
+                    throw new ArgumentException("Invalid State");
             }
         }
-
-
     }
 }

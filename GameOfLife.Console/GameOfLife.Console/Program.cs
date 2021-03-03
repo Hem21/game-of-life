@@ -5,11 +5,17 @@ namespace GameOfLife.Console
     class Program
     {
         static void Main(string[] args)
-        {
-            //Console.WriteLine("Hello World!");
+        { 
             Game game = new Game();
 
-            game.SetGrid();
+            //game.SetGrid();
+
+            var grid = game.CreateGrid(2,3);
+
+            game.StaysAlive(grid);
+
+           
+
 
         }
     }
