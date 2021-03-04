@@ -58,7 +58,7 @@ namespace GameOfLife.Console.Test
         }
 
         [TestMethod]
-        public void CreateGridWithLiveCell()
+        public void WhenCellSelectedInGridThenStatusBecomesTrue()
         {
 
             var game = new Game();
@@ -68,7 +68,6 @@ namespace GameOfLife.Console.Test
             var expectedGrid = new bool[2,3] { { true, false, false },{ false, false, false } };
 
             CollectionAssert.AreEqual(expectedGrid, updatedGrid);
-            Assert.ThrowsException<Exception>(() => Game.SetCell(grid, 1000, 5));
         }
 
         [TestMethod]
@@ -80,54 +79,62 @@ namespace GameOfLife.Console.Test
 
             Assert.ThrowsException<Exception>(() => Game.SetCell(grid, 1000, 5));
         }
-        /*
-                [TestMethod]
-                public void WhenCellCreatedWithInvalidStatusThenExceptionIsThrown()
-                {
-                    //test if exception is thrown with invalid status?
-                }
 
-                [TestMethod]
-                public void WhenCellIsSelectedThenStatusChangesToAlive()
-                {
-                    var game = new Game();
-                    var grid = game.CreateGrid(2,2);
+        //Any live cell with fewer than two live neighbours dies, as if by underpopulation.
 
-                    var updatedGrid = game.SetCell(Status.Alive, grid, 0, 1);
+        [TestMethod]
+        public void WhenCellHasNoAliveNeighbourInItsRowThenDiesAfterOneIteration()
+        {
 
-                    var alive = new Cell(Status.Alive);
-                    var dead = new Cell(Status.Dead);
-                    var expectedValue = new Cell[,] { { dead, alive }, { dead, dead } };
+            var game = new Game();
+            var grid = game.CreateGrid(2, 3);
 
-                    CollectionAssert.AreEqual(expectedValue, updatedGrid);
-                }
+            var initialGrid = Game.SetCell(grid, 0, 1);
 
-                [TestMethod]
-                public void WhenCellSelectIsOutOfRangeThenReturnGridUnchanged()
-                {
-                    //test if exception is thrown with invalid status instead??
-                }
+            var updatedGrid = Game.CheckRow(initialGrid);
 
-                //Any live cell with fewer than two live neighbours dies, as if by underpopulation.
-                [TestMethod]
-                public void WhenCellHasOneAliveNeighbourInItsRowThenDiesAfterOneIteration()
-                {
-
-                    var game = new Game();
-                    var grid = game.CreateGrid(2, 3);
-
-                    game.SetCell(Status.Alive, grid, 0, 1);
-                    var gameGrid = game.SetCell(Status.Alive, grid, 0, 2);
-                    var stayAlive = game.StaysAlive(gameGrid);
-
-                    var alive = new Cell(Status.Alive);
-                    var dead = new Cell(Status.Dead);
-                    var expectedGrid = new Cell[,] { { dead, dead, dead }, { dead, dead, dead } };
-
-                    CollectionAssert.AreEqual(expectedGrid, stayAlive);
+            var expectedGrid = new bool[2, 3] { { false, false, false }, { false, false, false } };
 
 
-                }
-                */
+            CollectionAssert.AreEqual(expectedGrid, updatedGrid);
+        }
+
+        [TestMethod]
+        public void WhenCellHasOneAliveNeighbourInItsRowThenDiesAfterOneIteration()
+        {
+
+            var game = new Game();
+            var grid = game.CreateGrid(2, 3);
+
+            Game.SetCell(grid, 0, 1);
+            var initialGrid = Game.SetCell(grid, 0, 2);
+
+            var updatedGrid = Game.CheckRow(initialGrid);
+
+            var expectedGrid = new bool[2, 3] { { false, false, false }, { false, false, false } };
+
+
+            CollectionAssert.AreEqual(expectedGrid, updatedGrid);
+        }
+
+        [TestMethod]
+        public void WhenCellHasTwoAliveNeighbourSInItsRowThenStaysAliveAfterOneIteration()
+        {
+
+            var game = new Game();
+            var grid = game.CreateGrid(2, 3);
+
+            Game.SetCell(grid, 0, 0);
+            Game.SetCell(grid, 0, 1);
+            var initialGrid = Game.SetCell(grid, 0, 2);
+
+            var updatedGrid = Game.CheckRow(initialGrid);
+
+            var expectedGrid = new bool[2, 3] { { false, false, false }, { false, false, false } };
+
+
+            CollectionAssert.AreEqual(expectedGrid, updatedGrid);
+        }
+
     }
 }

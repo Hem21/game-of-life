@@ -18,15 +18,15 @@ namespace GameOfLife.Console
             int column = selectColumn;
             if (row < 0 || row > grid.GetLength(0) || column < 0 || column > grid.GetLength(1))
             {
-                throw new Exception("Cell ...");
+                throw new Exception("Cell selected is not in range");
             }
 
             grid[row, column] = true;
 
             return grid;
         }
-/*
-        public Cell[,] StaysAlive(Cell[,] grid)
+
+        public static bool[,] CheckRow(bool[,] grid)
         {
             var row = grid.GetLength(0);
             var column = grid.GetLength(1);
@@ -35,17 +35,36 @@ namespace GameOfLife.Console
             {
                 for (int j = 0; j < column; j++)
                 {
-                    var firstValue = grid[i,j].Equals(Status.Alive);
-                    var secondValue = grid[i, j + 1].Equals(Status.Alive);
-                    if (firstValue && secondValue)
+                    var value = grid[i,j].Equals(true);
+
+                    if (j == 0 || j == column - 1)
                     {
-                        grid.SetValue(Status.Dead, i, j);
+                        if (value)
+                        {
+                            grid.SetValue(false, i, j);
+                        }
+                    }
+                    else
+                    {
+                        var valueBefore = grid[i, j - 1].Equals(true);
+                        var valueAfter = grid[i, j + 1].Equals(true);
+
+                        if (value && valueBefore && valueAfter)
+                        {
+                            return grid;
+                        } else if (value && (!valueBefore && !valueAfter))
+                        {
+                            grid.SetValue(false, i, j);
+                        } else if (value && (valueBefore || valueAfter))
+                        {
+                            grid.SetValue(false, i, j);
+                        }
                     }
                 }
             }
 
             return grid;
         }
-*/
+
     }
 }
