@@ -86,16 +86,27 @@ namespace GameOfLife.Console.Test
             var game = new Game();
             var grid = game.CreateGrid(3, 3);
 
-            var initialGrid = Game.SetCell(grid, 0, 1);
+            var actualValue = Game.SetCell(grid, 0, 1);
 
-            var updatedGrid = Game.CheckBeforeCellInRow(initialGrid);
+            var expectedValue = new bool[3, 3] { { false, true, false }, { false, false, false }, { false, false, false } };
 
-            var expectedValue = 
-
-
-            CollectionAssert.AreEqual(expectedGrid, updatedGrid);
+            CollectionAssert.AreEqual(expectedValue, actualValue);
         }
 
-        
+        [TestMethod]
+        public void CheckStatusOfAfterCellInRow()
+        {
+
+            var game = new Game();
+            var grid = game.CreateGrid(3, 3);
+
+            var actualValue = Game.SetCell(grid, 2, 1);
+
+            var expectedValue = new bool[3, 3] { { false, false, false }, { false, false, false }, { false, true, false } };
+
+            CollectionAssert.AreEqual(expectedValue, actualValue);
+        }
+
+
     }
 }

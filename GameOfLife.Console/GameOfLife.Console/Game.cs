@@ -24,61 +24,140 @@ namespace GameOfLife.Console
             return grid;
         }
 
-        public static bool[,] CheckRow(bool[,] grid)
+        public static object CheckBeforeCellInRow(bool[,] grid)
         {
             var row = grid.GetLength(0);
             var column = grid.GetLength(1);
-            //checking row
+
             for (int i = 0; i < row; i++)
             {
                 for (int j = 0; j < column; j++)
                 {
-                    var value = grid[i,j].Equals(true);
+                    var value = grid[i, j];
+                    var valueBefore = grid[i, j - 1];
 
-                    if (j == 0)
+                    if (j == column - 1)
                     {
-                        var valueAfter = grid[i, j + 1].Equals(true);
-                        if (value && valueAfter)
+                        if (valueBefore.Equals(true))
                         {
-                            grid.SetValue(false, i, j);
+                            return true;
                         }
                     }
-                    else if (j == column - 1)
+                }
+            }
+            return false;
+        }
+
+        public static object CheckAfterCellInRow(bool[,] grid)
+        {
+            var row = grid.GetLength(0);
+            var column = grid.GetLength(1);
+
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < column; j++)
+                {
+                    var value = grid[i, j];
+                    var valueAfter = grid[i, j + 1];
+
+                    if (j == column + 1)
                     {
-                        var valueBefore = grid[i, j - 1].Equals(true);
-                        if (value && valueBefore)
+                        if (valueAfter.Equals(true))
                         {
-                            grid.SetValue(false, i, j);
+                            return true;
                         }
                     }
-                    else
-                    {
-                        var valueBefore = grid[i, j - 1].Equals(true);
-                        var valueAfter = grid[i, j + 1].Equals(true);
+                }
+            }
+            return false;
+        }
 
-                        if (value && valueBefore && valueAfter)
-                        {
-                            grid.SetValue(true, i, j);
-                        }
-                        else if (value && (!valueBefore && !valueAfter))
-                        {
-                            grid.SetValue(false, i, j);
-                        }
-                        else if (value && (valueBefore || valueAfter))
-                        {
-                            grid.SetValue(false, i, j);
-                        }
+        public static object CheckCellsAndUpgrade(bool [,] grid)
+        {
+            var row = grid.GetLength(0);
+            var column = grid.GetLength(1);
+
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < column; j++)
+                {
+                    var value = grid[i, j];
+                    var valueBefore = grid[i, j - 1];
+                    var valueAfter = grid[i, j + 1];
+
+                    if (value == valueBefore == true || 
+                        value == valueAfter == true)
+                    {
+                        grid.SetValue(false, i, j);
+
+                    }
+                    else if (value == valueBefore == true &&
+                             value == valueAfter == true)
+                    {
+                        grid.SetValue(true, i, j);
                     }
                 }
             }
 
             return grid;
+
         }
 
-        public static object CheckBeforeCellInRow(bool[,] initialGrid)
+
+
+
+
+        /*public static bool[,] CheckRow(bool[,] grid)
+{
+    var row = grid.GetLength(0);
+    var column = grid.GetLength(1);
+    //checking row
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < column; j++)
         {
-            throw new NotImplementedException();
+            var value = grid[i,j].Equals(true);
+
+            if (j == 0)
+            {
+                var valueAfter = grid[i, j + 1].Equals(true);
+                if (value && valueAfter)
+                {
+                    grid.SetValue(false, i, j);
+                }
+            }
+            else if (j == column - 1)
+            {
+                var valueBefore = grid[i, j - 1].Equals(true);
+                if (value && valueBefore)
+                {
+                    grid.SetValue(false, i, j);
+                }
+            }
+            else
+            {
+                var valueBefore = grid[i, j - 1].Equals(true);
+                var valueAfter = grid[i, j + 1].Equals(true);
+
+                if (value && valueBefore && valueAfter)
+                {
+                    grid.SetValue(true, i, j);
+                }
+                else if (value && (!valueBefore && !valueAfter))
+                {
+                    grid.SetValue(false, i, j);
+                }
+                else if (value && (valueBefore || valueAfter))
+                {
+                    grid.SetValue(false, i, j);
+                }
+            }
         }
+    }
+
+    return grid;
+}
+*/
         /*
 public static bool[,] CheckColumn(bool[,] grid)
 {
