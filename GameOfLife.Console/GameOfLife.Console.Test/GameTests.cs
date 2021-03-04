@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace GameOfLife.Console.Test
 {
@@ -24,7 +25,7 @@ namespace GameOfLife.Console.Test
             Assert.AreEqual(2, grid.GetLength(0));
             Assert.AreEqual(3, grid.GetLength(1));
         }
-
+        
         [TestMethod]
         public void CanCreateCell()
         {
@@ -32,50 +33,69 @@ namespace GameOfLife.Console.Test
 
             Assert.IsNotNull(cell);
         }
-
+        
         [TestMethod]
         public void CanCreateNewCellWithDeadStatus()
         {
+            var cell = new Cell();
 
-            var status = Status.Dead;
-            var cell = new Cell(status);
+            var status = cell.Status;
 
-            Assert.AreEqual("D", cell.ToString());
+            Assert.IsFalse(status);
         }
 
         [TestMethod]
         public void CanCreateNewCellWithAliveStatus()
         {
+            var cell = new Cell();
 
-            var status = Status.Alive;
-            var cell = new Cell(status);
+            cell.Status = true;
 
-            Assert.AreEqual("A", cell.ToString());
+            var status = cell.Status;
+
+            Assert.IsTrue(status);
         }
 
         [TestMethod]
-        public void WhenCellCreatedWithInvalidStatusThenExceptionIsThrown()
+        public void WhenCellSelectedInGridThenStatusBecomesTrue()
         {
-            //test if exception is thrown with invalid status?
-        }
 
-        //Any live cell with fewer than two live neighbours dies, as if by underpopulation.
-        [TestMethod]
-        public void WhenCellHasTwoAliveNeighboursInItsRowThenStaysAliveAfterOneIteration()
-        {
             var game = new Game();
-            var alive = new Cell(Status.Alive);
-            var dead = new Cell(Status.Dead);
+            var grid = game.CreateGrid(2,3);
+            var updatedGrid = Game.SetCell(grid, 0, 0);
 
-            var grid = new Cell[,] { { alive, alive, alive }, { dead, dead, dead } };
+            var expectedGrid = new bool[2,3] { { true, false, false },{ false, false, false } };
 
-            var stayAlive = game.StaysAlive(grid);
-
-            var expectedValue = new Cell[,] { { dead, alive, dead }, { dead, dead, dead } };
-
-            CollectionAssert.AreEqual(expectedValue, stayAlive);
-
-
+            CollectionAssert.AreEqual(expectedGrid, updatedGrid);
         }
+
+        [TestMethod]
+        public void WhenCellSelectIsOutOfRangeThenReturnGridUnchanged()
+        {
+
+            var game = new Game();
+            var grid = game.CreateGrid(2, 3);
+
+            Assert.ThrowsException<Exception>(() => Game.SetCell(grid, -1, 5));
+        }
+
+        [TestMethod]
+        public void CheckStatusOfBeforeCellInRow()
+        {
+
+            var game = new Game();
+            var grid = game.CreateGrid(3, 3);
+
+            var initialGrid = Game.SetCell(grid, 0, 1);
+
+            var updatedGrid = Game.CheckBeforeCellInRow(initialGrid);
+
+            var expectedValue = 
+
+
+            CollectionAssert.AreEqual(expectedGrid, updatedGrid);
+        }
+
+        
     }
 }
