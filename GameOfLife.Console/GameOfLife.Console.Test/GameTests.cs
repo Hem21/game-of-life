@@ -25,7 +25,7 @@ namespace GameOfLife.Console.Test
             Assert.AreEqual(2, grid.GetLength(0));
             Assert.AreEqual(3, grid.GetLength(1));
         }
-        
+
         [TestMethod]
         public void CanCreateCell()
         {
@@ -33,7 +33,7 @@ namespace GameOfLife.Console.Test
 
             Assert.IsNotNull(cell);
         }
-        
+
         [TestMethod]
         public void CanCreateNewCellWithDeadStatus()
         {
@@ -61,10 +61,10 @@ namespace GameOfLife.Console.Test
         {
 
             var game = new Game();
-            var grid = game.CreateGrid(2,3);
+            var grid = game.CreateGrid(2, 3);
             var updatedGrid = Game.SetCell(grid, 0, 0);
 
-            var expectedGrid = new bool[2,3] { { true, false, false },{ false, false, false } };
+            var expectedGrid = new bool[2, 3] { { true, false, false }, { false, false, false } };
 
             CollectionAssert.AreEqual(expectedGrid, updatedGrid);
         }
@@ -80,33 +80,56 @@ namespace GameOfLife.Console.Test
         }
 
         [TestMethod]
-        public void CheckStatusOfBeforeCellInRow()
+        public void CheckNumberOfNeighboursIsOneInRow()
         {
 
             var game = new Game();
-            var grid = game.CreateGrid(3, 3);
+            var grid = game.CreateGrid(1, 3);
+            var updatedGrid = Game.SetCell(grid, 0, 2);
 
-            var actualValue = Game.SetCell(grid, 0, 1);
+            var actualValue = Game.CheckRowNeighbours(updatedGrid);
 
-            var expectedValue = new bool[3, 3] { { false, true, false }, { false, false, false }, { false, false, false } };
+            var expectedValue = 1;
 
-            CollectionAssert.AreEqual(expectedValue, actualValue);
+            Assert.AreEqual(expectedValue, actualValue);
+
         }
 
         [TestMethod]
-        public void CheckStatusOfAfterCellInRow()
+        public void CheckNumberOfNeighboursIsTwoInRow()
+        {
+
+            var game = new Game();
+            var grid = game.CreateGrid(1, 3);
+            Game.SetCell(grid, 0, 0);
+                        
+            var updatedGrid = Game.SetCell(grid, 0, 2);
+                              
+            var actualValue = Game.CheckRowNeighbours(updatedGrid);
+
+            var expectedValue = 2;
+
+            Assert.AreEqual(expectedValue, actualValue);
+
+        }
+
+        [TestMethod]
+        public void CheckNumberOfNeighboursInColumn()
         {
 
             var game = new Game();
             var grid = game.CreateGrid(3, 3);
+            Game.SetCell(grid, 1, 2);
 
-            var actualValue = Game.SetCell(grid, 2, 1);
+            var updatedGrid = Game.SetCell(grid, 0, 2);
 
-            var expectedValue = new bool[3, 3] { { false, false, false }, { false, false, false }, { false, true, false } };
+            var actualValue = Game.CheckColumnNeighbours(updatedGrid);
 
-            CollectionAssert.AreEqual(expectedValue, actualValue);
+            var expectedValue = 1;
+
+            Assert.AreEqual(expectedValue, actualValue);
         }
-
-
     }
+
+        
 }
