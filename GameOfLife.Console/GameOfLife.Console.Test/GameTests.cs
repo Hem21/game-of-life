@@ -47,10 +47,9 @@ namespace GameOfLife.Console.Test
         [TestMethod]
         public void CanCreateNewCellWithAliveStatus()
         {
-            var cell = new Cell
-            {
-                Status = true
-            };
+            var cell = new Cell();
+
+            cell.Status = true;
 
             var status = cell.Status;
 
@@ -77,64 +76,26 @@ namespace GameOfLife.Console.Test
             var game = new Game();
             var grid = game.CreateGrid(2, 3);
 
-            Assert.ThrowsException<Exception>(() => Game.SetCell(grid, 1000, 5));
+            Assert.ThrowsException<Exception>(() => Game.SetCell(grid, -1, 5));
         }
 
-        //Any live cell with fewer than two live neighbours dies, as if by underpopulation.
-
         [TestMethod]
-        public void WhenCellHasNoAliveNeighbourInItsRowThenDiesAfterOneIteration()
+        public void CheckStatusOfBeforeCellInRow()
         {
 
             var game = new Game();
-            var grid = game.CreateGrid(2, 3);
+            var grid = game.CreateGrid(3, 3);
 
             var initialGrid = Game.SetCell(grid, 0, 1);
 
-            var updatedGrid = Game.CheckRow(initialGrid);
+            var updatedGrid = Game.CheckBeforeCellInRow(initialGrid);
 
-            var expectedGrid = new bool[2, 3] { { false, false, false }, { false, false, false } };
-
-
-            CollectionAssert.AreEqual(expectedGrid, updatedGrid);
-        }
-
-        [TestMethod]
-        public void WhenCellHasOneAliveNeighbourInItsRowThenDiesAfterOneIteration()
-        {
-
-            var game = new Game();
-            var grid = game.CreateGrid(2, 3);
-
-            Game.SetCell(grid, 0, 1);
-            var initialGrid = Game.SetCell(grid, 0, 2);
-
-            var updatedGrid = Game.CheckRow(initialGrid);
-
-            var expectedGrid = new bool[2, 3] { { false, false, false }, { false, false, false } };
+            var expectedValue = 
 
 
             CollectionAssert.AreEqual(expectedGrid, updatedGrid);
         }
 
-        [TestMethod]
-        public void WhenCellHasTwoAliveNeighbourSInItsRowThenStaysAliveAfterOneIteration()
-        {
-
-            var game = new Game();
-            var grid = game.CreateGrid(2, 3);
-
-            Game.SetCell(grid, 0, 0);
-            Game.SetCell(grid, 0, 1);
-            var initialGrid = Game.SetCell(grid, 0, 2);
-
-            var updatedGrid = Game.CheckRow(initialGrid);
-
-            var expectedGrid = new bool[2, 3] { { false, false, false }, { false, false, false } };
-
-
-            CollectionAssert.AreEqual(expectedGrid, updatedGrid);
-        }
-
+        
     }
 }

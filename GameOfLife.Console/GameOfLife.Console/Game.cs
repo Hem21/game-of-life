@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GameOfLife.Console
 {
@@ -37,9 +35,18 @@ namespace GameOfLife.Console
                 {
                     var value = grid[i,j].Equals(true);
 
-                    if (j == 0 || j == column - 1)
+                    if (j == 0)
                     {
-                        if (value)
+                        var valueAfter = grid[i, j + 1].Equals(true);
+                        if (value && valueAfter)
+                        {
+                            grid.SetValue(false, i, j);
+                        }
+                    }
+                    else if (j == column - 1)
+                    {
+                        var valueBefore = grid[i, j - 1].Equals(true);
+                        if (value && valueBefore)
                         {
                             grid.SetValue(false, i, j);
                         }
@@ -51,11 +58,13 @@ namespace GameOfLife.Console
 
                         if (value && valueBefore && valueAfter)
                         {
-                            return grid;
-                        } else if (value && (!valueBefore && !valueAfter))
+                            grid.SetValue(true, i, j);
+                        }
+                        else if (value && (!valueBefore && !valueAfter))
                         {
                             grid.SetValue(false, i, j);
-                        } else if (value && (valueBefore || valueAfter))
+                        }
+                        else if (value && (valueBefore || valueAfter))
                         {
                             grid.SetValue(false, i, j);
                         }
@@ -66,5 +75,53 @@ namespace GameOfLife.Console
             return grid;
         }
 
+        public static object CheckBeforeCellInRow(bool[,] initialGrid)
+        {
+            throw new NotImplementedException();
+        }
+        /*
+public static bool[,] CheckColumn(bool[,] grid)
+{
+   var row = grid.GetLength(0);
+   var column = grid.GetLength(1);
+
+   //checking columns
+   for (int i = 0; i < row; i++)
+   {
+       for (int j = 0; j < column; j++)
+       {
+           var value = grid[i, j].Equals(true);
+
+           if (i == 0 || i == row - 1)
+           {
+               if (value)
+               {
+                   grid.SetValue(false, i, j);
+               }
+           }
+           else
+           {
+               var valueBefore = grid[i - 1, j].Equals(true);
+               var valueAfter = grid[i + 1, j].Equals(true);
+
+               if (value && valueBefore && valueAfter)
+               {
+                   grid.SetValue(true, i, j);
+               }
+               else if (value && (!valueBefore && !valueAfter))
+               {
+                   grid.SetValue(false, i, j);
+               }
+               else if (value && (valueBefore || valueAfter))
+               {
+                   grid.SetValue(false, i, j);
+               }
+           }
+       }
+   }
+
+   return grid;
+}
+*/
     }
 }
