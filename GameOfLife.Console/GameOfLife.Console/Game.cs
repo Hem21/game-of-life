@@ -12,8 +12,8 @@ namespace GameOfLife.Console
 
         public static bool[,] SetCell(bool[,] grid, int selectRowPosition, int selectColumnPosition)
         {
-            int row = selectRowPosition;
-            int column = selectColumnPosition;
+            var row = selectRowPosition;
+            var column = selectColumnPosition;
             if (row < 0 || row > grid.GetLength(0) || column < 0 || column > grid.GetLength(1))
             {
                 throw new Exception("Cell selected is not in range");
@@ -24,34 +24,36 @@ namespace GameOfLife.Console
             return grid;
         }
 
-        public static int CheckRowNeighbours(bool[,] grid)
+        public static int CheckRowNeighbors(int rowNumber, int columnNumber, bool[,] grid)
         {
-            var row = grid.GetLength(0);
-            var column = grid.GetLength(1);
-            int SumOfRowNeighbours = 0;
-            
+            var sumOfRowNeighbors = 0;
+
+            var rows = grid.GetLength(0);
+            var columns = grid.GetLength(1);
 
             //checking row
-            for (int i = 0; i < row; i++)
+            for (var i = 0; i < rows; i++)
             {
 
-                for (int j = 0; j < column; j++)
+                for (var j = 0; j < columns; j++)
                 {
-
+                    var isNotRow = i != rowNumber;
+                    var isNotColumn = j != columnNumber;
+                    if (isNotRow || isNotColumn) continue;
                     if (j == 0)
                     {
                         var valueAfter = grid[i, j + 1];
                         if (valueAfter.Equals(true))
                         {
-                            SumOfRowNeighbours += 1;
+                            sumOfRowNeighbors += 1;
                         }
                     }
-                    else if (j == column - 1)
+                    else if (j == columns - 1)
                     {
                         var valueBefore = grid[i, j - 1];
                         if (valueBefore.Equals(true))
                         {
-                            SumOfRowNeighbours += 1;
+                            sumOfRowNeighbors += 1;
                         }
                     }
                     else
@@ -59,157 +61,265 @@ namespace GameOfLife.Console
                         var valueBefore = grid[i, j - 1].Equals(true);
                         var valueAfter = grid[i, j + 1].Equals(true);
 
-                        if (valueBefore.Equals(true) && !valueAfter.Equals(true))
+                        if (valueBefore.Equals(true) && valueAfter.Equals(true))
                         {
-                            SumOfRowNeighbours += 1;
+                            sumOfRowNeighbors += 2;
+                            break;
                         }
-                        else if (!valueBefore.Equals(true) && valueAfter.Equals(true))
+                        else if (valueBefore.Equals(true) || valueAfter.Equals(true))
                         {
-                            SumOfRowNeighbours += 1;
+                            sumOfRowNeighbors += 1;
+                            break;
                         }
-                        else if (valueBefore.Equals(true) && valueAfter.Equals(true))
+                        else if (!valueBefore.Equals(true) && !valueAfter.Equals(true))
                         {
-                            SumOfRowNeighbours += 1;
+                            sumOfRowNeighbors += 0;
+                            break;
                         }
 
                     }
                 }
             }
 
-            return SumOfRowNeighbours;
+            return sumOfRowNeighbors;
         }
 
-        public static int CheckColumnNeighbours(bool[,] grid)
+        public static int CheckColumnAboveAndBelowNeighbors(int rowNumber, int columnNumber, bool[,] grid)
         {
-            var row = grid.GetLength(0);
-            var column = grid.GetLength(1);
-            int SumOfColumnNeighbours = 0;
+            var rows = grid.GetLength(0);
+            var columns = grid.GetLength(1);
+            var sumOfColumnNeighbors = 0;
 
             //checking column
-            for (int i = 0; i < row; i++)
+            for (var i = 0; i < columns; i++)
             {
-                for (int j = 0; j < column; j++)
-                {
 
+                for (var j = 0; j < rows; j++)
+                {
+                    var isNotRow = i != rowNumber;
+                    var isNotColumn = j != columnNumber;
+                    if (isNotRow || isNotColumn) continue;
                     if (i == 0)
                     {
-                        var valueAfter = grid[i + 1, j];
-                        if (valueAfter.Equals(true))
+                        var valueBelow = grid[i + 1, j];
+                        if (valueBelow.Equals(true))
                         {
-                            SumOfColumnNeighbours += 1;
-                            break;
+                            sumOfColumnNeighbors += 1;
                         }
                     }
-                    else if (i == row - 1)
+                    else if (i == columns - 1)
                     {
-                        var valueBefore = grid[i - 1, j];
-                        if (valueBefore.Equals(true))
+                        var valueAbove = grid[i - 1, j];
+                        if (valueAbove.Equals(true))
                         {
-                            SumOfColumnNeighbours += 1;
-                            break;
+                            sumOfColumnNeighbors += 1;
                         }
                     }
                     else
                     {
-                        var valueBefore = grid[i - 1, j].Equals(true);
-                        var valueAfter = grid[i + 1, j].Equals(true);
+                        var valueAbove = grid[i - 1, j].Equals(true);
+                        var valueBelow = grid[i + 1, j].Equals(true);
 
-                        if (valueBefore.Equals(true))
+                        if (valueAbove.Equals(true) && valueBelow.Equals(true))
                         {
-                            SumOfColumnNeighbours += 1;
+                            sumOfColumnNeighbors += 2;
                         }
-                        else if (valueAfter.Equals(true))
+                        else if (valueAbove.Equals(true) || valueBelow.Equals(true))
                         {
-                            SumOfColumnNeighbours += 1;
+                            sumOfColumnNeighbors += 1;
+                        }
+                        else if (!valueAbove.Equals(true) && !valueBelow.Equals(true))
+                        {
+                            sumOfColumnNeighbors += 0;
                         }
 
                     }
                 }
             }
 
-            return SumOfColumnNeighbours;
+            return sumOfColumnNeighbors;
         }
 
-
-        public static object CheckCellsAndUpgrade(bool [,] grid)
+        public static int CheckColumnDiagonalNeighbors(int rowNumber, int columnNumber, bool[,] grid)
         {
-            var row = grid.GetLength(0);
-            var column = grid.GetLength(1);
+            var rows = grid.GetLength(0);
+            var columns = grid.GetLength(1);
+            var sumOfColumnNeighbors = 0;
 
-            for (int i = 0; i < row; i++)
+            //checking column
+            for (var i = 0; i < columns; i++)
             {
-                for (int j = 0; j < column; j++)
+
+                for (var j = 0; j < rows; j++)
                 {
-                    var value = grid[i, j];
-                    var valueBefore = grid[i, j - 1];
-                    var valueAfter = grid[i, j + 1];
-
-                    if (value == valueBefore == true || 
-                        value == valueAfter == true)
+                    var isNotRow = i != rowNumber;
+                    var isNotColumn = j != columnNumber;
+                    if (isNotRow || isNotColumn) continue;
+                    if (i == 0)
                     {
-                        grid.SetValue(false, i, j);
-
+                        if (j == 0)
+                        {
+                            var valueDiagBelowAfter = grid[i + 1, j + 1];
+                            if (valueDiagBelowAfter.Equals(true))
+                            {
+                                sumOfColumnNeighbors += 1;
+                            }
+                        } else if (j == rows - 1)
+                        {
+                            var valueDiagBelowBefore = grid[i + 1, j - 1];
+                            if (valueDiagBelowBefore.Equals(true))
+                            {
+                                sumOfColumnNeighbors += 1;
+                            }
+                        }
                     }
-                    else if (value == valueBefore == true &&
-                             value == valueAfter == true)
+                    else if (i == columns - 1)
                     {
-                        grid.SetValue(true, i, j);
+                        if (j == 0)
+                        {
+                            var valueDiagAboveAfter = grid[i - 1, j + 1];
+                            if (valueDiagAboveAfter.Equals(true))
+                            {
+                                sumOfColumnNeighbors += 1;
+                            }
+                        }
+                        else if (j == rows - 1)
+                        {
+                            var valueDiagAboveBefore = grid[i - 1, j - 1];
+                            if (valueDiagAboveBefore.Equals(true))
+                            {
+                                sumOfColumnNeighbors += 1;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (j == 0)
+                        {
+                            var valueDiagAboveAfter = grid[i - 1, j + 1].Equals(true);
+                            var valueDiagBelowAfter = grid[i + 1, j + 1].Equals(true);
+                            if (valueDiagAboveAfter.Equals(true) && valueDiagBelowAfter)
+                            {
+                                sumOfColumnNeighbors += 2;
+                            }
+                            else if (valueDiagBelowAfter || valueDiagAboveAfter)
+                            {
+                                sumOfColumnNeighbors += 1;
+                            }
+                            else
+                            {
+                                sumOfColumnNeighbors += 0;
+                            }
+                        }
+                        else if (j == rows - 1)
+                        {
+                            var valueDiagAboveBefore = grid[i - 1, j - 1].Equals(true);
+                            var valueDiagBelowBefore = grid[i + 1, j - 1].Equals(true);
+                            if (valueDiagAboveBefore && valueDiagBelowBefore)
+                            {
+                                sumOfColumnNeighbors += 2;
+                            }
+                            else if (valueDiagAboveBefore || valueDiagBelowBefore)
+                            {
+                                sumOfColumnNeighbors += 1;
+                            }
+                            else
+                            {
+                                sumOfColumnNeighbors += 0;
+                            }
+                        }
+                        else
+                        {
+
+                            var valueDiagBelowBefore = grid[i + 1, j - 1].Equals(true);
+                            var valueDiagBelowAfter = grid[i + 1, j + 1].Equals(true);
+                            var valueDiagAboveBefore = grid[i - 1, j - 1].Equals(true);
+                            var valueDiagAboveAfter = grid[i - 1, j + 1].Equals(true);
+
+                            if (valueDiagBelowBefore && valueDiagBelowAfter && valueDiagAboveBefore &&
+                                valueDiagAboveAfter)
+                            {
+                                sumOfColumnNeighbors += 4;
+                            }
+                            else if ((valueDiagBelowBefore && valueDiagBelowAfter && valueDiagAboveBefore) ||
+                                     (valueDiagBelowBefore && valueDiagBelowAfter && valueDiagAboveAfter) ||
+                                     (valueDiagBelowBefore && valueDiagAboveAfter && valueDiagAboveBefore) ||
+                                     (valueDiagAboveBefore && valueDiagBelowAfter && valueDiagAboveAfter))
+                            {
+                                sumOfColumnNeighbors += 3;
+                            }
+                            else if ((valueDiagBelowBefore && valueDiagBelowAfter) ||
+                                     (valueDiagBelowBefore && valueDiagAboveBefore) ||
+                                     (valueDiagBelowBefore && valueDiagAboveAfter) ||
+                                     (valueDiagBelowAfter && valueDiagAboveBefore) ||
+                                     (valueDiagBelowAfter && valueDiagAboveAfter) ||
+                                     (valueDiagAboveBefore && valueDiagAboveAfter))
+                            {
+                                sumOfColumnNeighbors += 2;
+                            }
+                            else if (valueDiagBelowBefore || valueDiagBelowAfter || valueDiagAboveBefore ||
+                                     valueDiagAboveAfter)
+                            {
+                                sumOfColumnNeighbors += 1;
+                            }
+                            else
+                            {
+                                sumOfColumnNeighbors += 0;
+                            }
+                        }
                     }
                 }
             }
 
-            return grid;
-
+            return sumOfColumnNeighbors;
         }
 
+        public static bool[,] UpdateGrid(bool[,] grid)
+        {
+            var columns = grid.GetLength(0);
+            var rows = grid.GetLength(1);
+            var updatedGrid = new bool[columns, rows];
 
+            for (var i = 0; i < columns; i++)
+            {
+                for (var j = 0; j < rows; j++)
+                {
+                    var sumOfRowNeighbors = CheckRowNeighbors(i, j, grid);
+                    var sumOfColumnNeighbors = CheckColumnAboveAndBelowNeighbors(i, j, grid);
+                    var sumOfDiagonalNeighbors = CheckColumnDiagonalNeighbors(i, j, grid);
+                    var sumOfNeighbors = sumOfRowNeighbors + sumOfColumnNeighbors + sumOfDiagonalNeighbors;
 
+                    var cellStatus = grid.GetValue(i, j);
 
+                    if (cellStatus.Equals(true))
+                    {
+                        if (sumOfNeighbors < 2)
+                        {
+                            updatedGrid.SetValue(false, i, j);
+                        } else if (sumOfNeighbors <= 3)
+                        {
+                            updatedGrid.SetValue(true, i, j);
+                        }
+                        else
+                        {
+                            updatedGrid.SetValue(false, i, j);
+                        }
+                    }
+                    else
+                    {
+                        if (sumOfNeighbors == 3)
+                        {
+                            updatedGrid.SetValue(true, i, j);
+                        }
+                        else
+                        {
+                            updatedGrid.SetValue(false, i , j);
+                        }
+                    }
+                }
+            }
 
- 
-        /*
-public static bool[,] CheckColumn(bool[,] grid)
-{
-   var row = grid.GetLength(0);
-   var column = grid.GetLength(1);
-
-   //checking columns
-   for (int i = 0; i < row; i++)
-   {
-       for (int j = 0; j < column; j++)
-       {
-           var value = grid[i, j].Equals(true);
-
-           if (i == 0 || i == row - 1)
-           {
-               if (value)
-               {
-                   grid.SetValue(false, i, j);
-               }
-           }
-           else
-           {
-               var valueBefore = grid[i - 1, j].Equals(true);
-               var valueAfter = grid[i + 1, j].Equals(true);
-
-               if (value && valueBefore && valueAfter)
-               {
-                   grid.SetValue(true, i, j);
-               }
-               else if (value && (!valueBefore && !valueAfter))
-               {
-                   grid.SetValue(false, i, j);
-               }
-               else if (value && (valueBefore || valueAfter))
-               {
-                   grid.SetValue(false, i, j);
-               }
-           }
-       }
-   }
-
-   return grid;
-}
-*/
+            return updatedGrid;
+        }
     }
 }
