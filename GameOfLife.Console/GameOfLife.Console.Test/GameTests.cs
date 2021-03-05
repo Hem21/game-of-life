@@ -128,7 +128,9 @@ namespace GameOfLife.Console.Test
             var game = new Game();
             var grid = game.CreateGrid(3, 3);
             var setGrid = Game.SetCell(grid, 1, 1);
-            var actualValue = Game.CheckColumnNeighbors(1, setGrid);
+            var aboveBelow = Game.CheckColumnAboveAndBelowNeighbors(1, 1, setGrid);
+            var diagonal = Game.CheckColumnDiagonalNeighbors(1, 1, setGrid);
+            var actualValue = aboveBelow + diagonal;
 
             var expectedValue = 0;
 
@@ -142,7 +144,9 @@ namespace GameOfLife.Console.Test
             var grid = game.CreateGrid(3, 3);
             Game.SetCell(grid, 2, 2);
             var setGrid = Game.SetCell(grid, 1, 1);
-            var actualValue = Game.CheckColumnNeighbors(2, setGrid);
+            var aboveBelow = Game.CheckColumnAboveAndBelowNeighbors(1, 1, setGrid);
+            var diagonal = Game.CheckColumnDiagonalNeighbors(1, 1, setGrid);
+            var actualValue = aboveBelow + diagonal;
 
             var expectedValue = 1;
 
@@ -157,7 +161,9 @@ namespace GameOfLife.Console.Test
             Game.SetCell(grid, 0, 0);
             Game.SetCell(grid, 2, 2);
             var setGrid = Game.SetCell(grid, 1, 1);
-            var actualValue = Game.CheckColumnNeighbors(1, setGrid);
+            var aboveBelow = Game.CheckColumnAboveAndBelowNeighbors(1, 1, setGrid);
+            var diagonal = Game.CheckColumnDiagonalNeighbors(1, 1, setGrid);
+            var actualValue = aboveBelow + diagonal;
 
             var expectedValue = 2;
 
@@ -173,7 +179,9 @@ namespace GameOfLife.Console.Test
             Game.SetCell(grid, 2, 1);
             Game.SetCell(grid, 2, 2);
             var setGrid = Game.SetCell(grid, 1, 1);
-            var actualValue = Game.CheckColumnNeighbors(1, setGrid);
+            var aboveBelow = Game.CheckColumnAboveAndBelowNeighbors(1, 1, setGrid);
+            var diagonal = Game.CheckColumnDiagonalNeighbors(1, 1, setGrid);
+            var actualValue = aboveBelow + diagonal;
 
             var expectedValue = 3;
 
@@ -190,7 +198,9 @@ namespace GameOfLife.Console.Test
             Game.SetCell(grid, 2, 1);
             Game.SetCell(grid, 2, 2);
             var setGrid = Game.SetCell(grid, 1, 1);
-            var actualValue = Game.CheckColumnNeighbors(1, setGrid);
+            var aboveBelow = Game.CheckColumnAboveAndBelowNeighbors(1, 1, setGrid);
+            var diagonal = Game.CheckColumnDiagonalNeighbors(1, 1, setGrid);
+            var actualValue = aboveBelow + diagonal;
 
             var expectedValue = 4;
 
@@ -208,7 +218,9 @@ namespace GameOfLife.Console.Test
             Game.SetCell(grid, 2, 1);
             Game.SetCell(grid, 2, 2);
             var setGrid = Game.SetCell(grid, 1, 1);
-            var actualValue = Game.CheckColumnNeighbors(1, setGrid);
+            var aboveBelow = Game.CheckColumnAboveAndBelowNeighbors(1, 1, setGrid);
+            var diagonal = Game.CheckColumnDiagonalNeighbors(1, 1, setGrid);
+            var actualValue = aboveBelow + diagonal;
 
             var expectedValue = 5;
 
@@ -227,7 +239,9 @@ namespace GameOfLife.Console.Test
             Game.SetCell(grid, 2, 1);
             Game.SetCell(grid, 2, 2);
             var setGrid = Game.SetCell(grid, 1, 1);
-            var actualValue = Game.CheckColumnNeighbors(1, setGrid);
+            var aboveBelow = Game.CheckColumnAboveAndBelowNeighbors(1, 1, setGrid);
+            var diagonal = Game.CheckColumnDiagonalNeighbors(1, 1, setGrid);
+            var actualValue = aboveBelow + diagonal;
 
             var expectedValue = 6;
 
@@ -247,65 +261,85 @@ namespace GameOfLife.Console.Test
             Game.SetCell(grid, 2, 2);
             Game.SetCell(grid, 1, 0);
             var setGrid = Game.SetCell(grid, 1, 1);
-            var columnNeighbors = Game.CheckColumnNeighbors(1, setGrid);
+            var aboveBelow = Game.CheckColumnAboveAndBelowNeighbors(1, 1, setGrid);
+            var diagonal = Game.CheckColumnDiagonalNeighbors(1, 1, setGrid);
             var rowNeighbors = Game.CheckRowNeighbors(1, 1, setGrid);
-            var actualValue = columnNeighbors + rowNeighbors;
+            var actualValue = aboveBelow + diagonal + rowNeighbors;
 
             var expectedValue = 7;
 
             Assert.AreEqual(expectedValue, actualValue);
         }
 
-        /*
         [TestMethod]
-        public void WhenCellHasNoLiveRowNeighborThenCellDies()
+        public void WhenCellHasEightNeighborsThenEightReturned()
         {
-
             var game = new Game();
-            var grid = game.CreateGrid(1, 3);
-
-            var setGrid = Game.SetCell(grid, 0, 2);
-
-            var actualValue = Game.UpdateGrid(setGrid);
-            var expectedValue = new bool[,] { { false, false, false} };
-
-            CollectionAssert.AreEqual(expectedValue, actualValue);
-        }
-        /*
-        [TestMethod]
-        public void WhenCellHasOneRowNeighborThenCellDies()
-        {
-
-            var game = new Game();
-            var grid = game.CreateGrid(1, 3);
-
-            Game.SetCell(grid, 0, 1);
-            var setGrid = Game.SetCell(grid, 0, 2);
-
-            var actualValue = Game.UpdateGrid(setGrid);
-            var expectedValue = new bool[,] { { false, false, false } };
-
-            CollectionAssert.AreEqual(expectedValue, actualValue);
-        }
-
-        [TestMethod]
-        public void WhenCellHasTwoRowNeighborThenCellStaysAlive()
-        {
-
-            var game = new Game();
-            var grid = game.CreateGrid(1, 3);
-
+            var grid = game.CreateGrid(3, 3);
             Game.SetCell(grid, 0, 0);
             Game.SetCell(grid, 0, 1);
-            var setGrid = Game.SetCell(grid, 0, 2);
+            Game.SetCell(grid, 0, 2);
+            Game.SetCell(grid, 2, 0);
+            Game.SetCell(grid, 2, 1);
+            Game.SetCell(grid, 2, 2);
+            Game.SetCell(grid, 1, 0);
+            Game.SetCell(grid, 1, 2);
+            var setGrid = Game.SetCell(grid, 1, 1);
+            var aboveBelow = Game.CheckColumnAboveAndBelowNeighbors(1, 1, setGrid);
+            var diagonal = Game.CheckColumnDiagonalNeighbors(1, 1, setGrid);
+            var rowNeighbors = Game.CheckRowNeighbors(1, 1, setGrid);
+            var actualValue = aboveBelow + diagonal + rowNeighbors;
 
-            var actualValue = Game.UpdateGrid(setGrid);
-            var expectedValue = new bool[,] { { false, true, false } };
+            var expectedValue = 8;
 
-            CollectionAssert.AreEqual(expectedValue, actualValue);
+            Assert.AreEqual(expectedValue, actualValue);
         }
-        */
+
+        [TestMethod]
+        public void WhenLiveCellHasNoAliveNeighborsThenDies()
+        {
+            var game = new Game();
+            var grid = game.CreateGrid(3, 3);
+            Game.SetCell(grid, 0, 1);
+            var setGrid = Game.SetCell(grid, 2, 2);
+            var actualGrid = Game.UpdateGrid(setGrid);
+
+            var expectedGrid = new bool[,] { { false, false, false }, { false, false, false }, { false, false, false } };
+
+            CollectionAssert.AreEqual(expectedGrid, actualGrid);
+        }
+
+        [TestMethod]
+        public void WhenLiveCellHasOneAliveNeighborsThenDies()
+        {
+            var game = new Game();
+            var grid = game.CreateGrid(3, 3);
+            Game.SetCell(grid, 0, 1);
+            var setGrid = Game.SetCell(grid, 1, 1);
+            var actualGrid = Game.UpdateGrid(setGrid);
+
+            var expectedGrid = new bool[,] {{false, false, false}, {false, false, false}, {false, false, false}};
+
+            CollectionAssert.AreEqual(expectedGrid, actualGrid);
+        }
+
+        [TestMethod]
+        public void WhenLiveCellHasTwoAliveNeighborsThenDies()
+        {
+            var game = new Game();
+            var grid = game.CreateGrid(3, 3);
+            Game.SetCell(grid, 0, 1);
+            Game.SetCell(grid, 0, 2);
+            var setGrid = Game.SetCell(grid, 1, 1);
+            var actualGrid = Game.UpdateGrid(setGrid);
+
+            var expectedGrid = new bool[,] { { false, true, true }, { false, true, true }, { false, false, false } };
+
+            CollectionAssert.AreEqual(expectedGrid, actualGrid);
+        }
+
+
     }
 
-        
+
 }
