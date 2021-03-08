@@ -172,8 +172,24 @@ namespace GameOfLife.Console
                                 sumOfColumnNeighbors += 1;
                             }
                         }
+                        else
+                        {
+                            var valueDiagBelowBefore = grid[i + 1, j - 1].Equals(true);
+                            var valueDiagBelowAfter = grid[i + 1, j + 1].Equals(true);
+                            if (valueDiagBelowAfter && valueDiagBelowBefore)
+                            {
+                                sumOfColumnNeighbors += 2;
+                            } else if (valueDiagBelowBefore || valueDiagBelowAfter)
+                            {
+                                sumOfColumnNeighbors += 1;
+                            }
+                            else
+                            {
+                                sumOfColumnNeighbors += 0;
+                            }
+                        }
                     }
-                    else if (i == columns - 1)
+                    else if (i == (columns - 1))
                     {
                         if (j == 0)
                         {
@@ -189,6 +205,23 @@ namespace GameOfLife.Console
                             if (valueDiagAboveBefore.Equals(true))
                             {
                                 sumOfColumnNeighbors += 1;
+                            }
+                        }
+                        else
+                        {
+                            var valueDiagAboveBefore = grid[i - 1, j - 1].Equals(true);
+                            var valueDiagAboveAfter = grid[i - 1, j + 1].Equals(true);
+                            if (valueDiagAboveBefore && valueDiagAboveAfter)
+                            {
+                                sumOfColumnNeighbors += 2;
+                            }
+                            else if (valueDiagAboveBefore || valueDiagAboveAfter)
+                            {
+                                sumOfColumnNeighbors += 1;
+                            }
+                            else
+                            {
+                                sumOfColumnNeighbors += 0;
                             }
                         }
                     }

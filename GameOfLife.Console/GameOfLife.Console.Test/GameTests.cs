@@ -304,7 +304,7 @@ namespace GameOfLife.Console.Test
             var setGrid = Game.SetCell(grid, 2, 2);
             var actualGrid = Game.UpdateGrid(setGrid);
 
-            var expectedGrid = new bool[,] { { false, false, false }, { false, false, false }, { false, false, false } };
+            var expectedGrid = new[,] { { false, false, false }, { false, false, false }, { false, false, false } };
 
             CollectionAssert.AreEqual(expectedGrid, actualGrid);
         }
@@ -318,13 +318,13 @@ namespace GameOfLife.Console.Test
             var setGrid = Game.SetCell(grid, 1, 1);
             var actualGrid = Game.UpdateGrid(setGrid);
 
-            var expectedGrid = new bool[,] {{false, false, false}, {false, false, false}, {false, false, false}};
+            var expectedGrid = new[,] {{false, false, false}, {false, false, false}, {false, false, false}};
 
             CollectionAssert.AreEqual(expectedGrid, actualGrid);
         }
 
         [TestMethod]
-        public void WhenLiveCellHasTwoAliveNeighborsThenDies()
+        public void WhenLiveCellHasTwoAliveNeighborsThenLives()
         {
             var game = new Game();
             var grid = game.CreateGrid(3, 3);
@@ -333,7 +333,55 @@ namespace GameOfLife.Console.Test
             var setGrid = Game.SetCell(grid, 1, 1);
             var actualGrid = Game.UpdateGrid(setGrid);
 
-            var expectedGrid = new bool[,] { { false, true, true }, { false, true, true }, { false, false, false } };
+            var expectedGrid = new[,] { { false, true, true }, { false, true, true }, { false, false, false } };
+
+            CollectionAssert.AreEqual(expectedGrid, actualGrid);
+        }
+
+        [TestMethod]
+        public void WhenLiveCellHasThreeAliveNeighborsThenLives()
+        {
+            var game = new Game();
+            var grid = game.CreateGrid(3, 3);
+            Game.SetCell(grid, 0, 1);
+            Game.SetCell(grid, 0, 2);
+            Game.SetCell(grid, 1, 2);
+            var setGrid = Game.SetCell(grid, 1, 1);
+            var actualGrid = Game.UpdateGrid(setGrid);
+
+            var expectedGrid = new[,] { { false, true, true }, { false, true, true }, { false, false, false } };
+
+            CollectionAssert.AreEqual(expectedGrid, actualGrid);
+        }
+
+        [TestMethod]
+        public void WhenLiveCellHasFourAliveNeighborsThenDies()
+        {
+            var game = new Game();
+            var grid = game.CreateGrid(3, 3);
+            Game.SetCell(grid, 0, 1);
+            Game.SetCell(grid, 0, 2);
+            Game.SetCell(grid, 1, 2);
+            Game.SetCell(grid, 2, 1);
+            var setGrid = Game.SetCell(grid, 1, 1);
+            var actualGrid = Game.UpdateGrid(setGrid);
+
+            var expectedGrid = new[,] { { false, true, true }, { true, false, false }, { false, true, true } };
+
+            CollectionAssert.AreEqual(expectedGrid, actualGrid);
+        }
+
+        [TestMethod]
+        public void WhenDeadCellHasThreeAliveNeighborsThenBecomesAlive()
+        {
+            var game = new Game();
+            var grid = game.CreateGrid(3, 3);
+            Game.SetCell(grid, 0, 1);
+            Game.SetCell(grid, 1, 0);
+            var setGrid = Game.SetCell(grid, 2, 1);
+            var actualGrid = Game.UpdateGrid(setGrid);
+
+            var expectedGrid = new[,] { { false, false, false }, { true, true, false }, { false, false, false } };
 
             CollectionAssert.AreEqual(expectedGrid, actualGrid);
         }
