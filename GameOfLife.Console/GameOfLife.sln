@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameOfLife.Service", "GameOfLife.Service\GameOfLife.Service.csproj", "{61F647DB-18E5-491C-BDCB-9A7E7F9BE0CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{516989B8-10DF-4E3B-8508-5FE5C1AAC730}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{516989B8-10DF-4E3B-8508-5FE5C1AAC730}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{516989B8-10DF-4E3B-8508-5FE5C1AAC730}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61F647DB-18E5-491C-BDCB-9A7E7F9BE0CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F647DB-18E5-491C-BDCB-9A7E7F9BE0CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F647DB-18E5-491C-BDCB-9A7E7F9BE0CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F647DB-18E5-491C-BDCB-9A7E7F9BE0CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
