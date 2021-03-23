@@ -17,6 +17,12 @@ export class BackEndService {
     const body = { row: row, column: column };
     return this.http.post<Grid>(url, body);
   }
+
+  setCells(grid: Grid, rowIndex: number, columnIndex: number): Observable<Grid> {
+    const url = `${this.urlBase}setcells/`;
+    const body = { grid, rowIndex, columnIndex };
+    return this.http.post<Grid>(url, body);
+  }
 }
 
 export class Grid {

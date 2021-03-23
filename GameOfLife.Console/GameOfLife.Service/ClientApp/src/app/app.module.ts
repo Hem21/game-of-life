@@ -27,10 +27,11 @@ import { GridSetUpComponent } from './grid/grid.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-    ])
+      { path: "home", component: HomeComponent },
+      { path: "grid", component: GridSetUpComponent },
+      { path: " ", redirectTo: "home", pathMatch: "full" },
+      { path: "**", redirectTo: "home", pathMatch: "full" }
+    ], { useHash: true })
   ],
   providers: [],
   bootstrap: [AppComponent]

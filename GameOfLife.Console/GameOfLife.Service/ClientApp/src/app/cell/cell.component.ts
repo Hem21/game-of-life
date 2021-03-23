@@ -10,6 +10,9 @@ export class CellComponent {
   row: number;
   column: number;
   public grid: Grid;
+  rowPosition: number;
+  columnPosition: number;
+  public setGrid: Grid;
 
 
   constructor(private backendService: BackEndService) { }
@@ -36,6 +39,13 @@ export class CellComponent {
   }
 
   selectCell(rowIndex: number, columnIndex: number) {
+    this.rowPosition = rowIndex;
+    this.columnPosition = columnIndex;
     console.log({ rowIndex, columnIndex });
+
+    this.backendService.setCells(this.grid, rowIndex, columnIndex).subscribe(result => {
+      console.log(result);
+      this.setGrid = result;
+    })
   }
 }
