@@ -1,6 +1,10 @@
 <body>
-  <app-nav-menu></app-nav-menu>
-  <div class="container">
+  <div class="container" style="padding: 20px;">
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand">{{mainTitle}}</a>
+      <a class="nav-link" [routerLink]="['/home']">Home</a>
+    </nav>
+    <h1>{{pageTitle}}</h1>
     <router-outlet></router-outlet>
   </div>
 </body>
