@@ -1,9 +1,9 @@
-﻿using WebAppExample.Controllers;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using WebAppExample.Models;
 using Newtonsoft.Json;
+using WebAppExample.Controllers;
+using WebAppExample.Models;
 
 namespace GameOfLife.Console.Test
 {
