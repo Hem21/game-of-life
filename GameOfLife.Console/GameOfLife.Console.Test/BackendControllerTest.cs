@@ -73,7 +73,7 @@ namespace GameOfLife.Console.Test
         }
 
         [TestMethod]
-        public void WhenFrontEndSelectscelssBackEndReturnsTrueCells()
+        public void WhenFrontEndSelectsCellsBackEndReturnsTrueCells()
         {
             var expected = new bool[1, 2] { { false, true } };
             var controller = new AppController();
@@ -96,6 +96,9 @@ namespace GameOfLife.Console.Test
             Assert.IsNotNull(setGridResult);
             CollectionAssert.AreEqual(expected, setGridResult);
         }
+
+
+
     }
 }
 

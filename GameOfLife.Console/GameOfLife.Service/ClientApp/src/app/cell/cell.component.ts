@@ -32,8 +32,6 @@ export class CellComponent {
 
   callBackend(row: number, column: number) {
     this.backendService.requestGrid(row, column).pipe(take(1)).subscribe(result => {
-      console.log('this is the result');
-      console.log(result);
       this.grid = result;
     });
   }
@@ -41,11 +39,8 @@ export class CellComponent {
   selectCell(rowIndex: number, columnIndex: number) {
     this.rowPosition = rowIndex;
     this.columnPosition = columnIndex;
-    console.log({ rowIndex, columnIndex });
-
     this.backendService.setCells(this.grid, rowIndex, columnIndex).subscribe(result => {
-      console.log(result);
-      this.setGrid = result;
+      this.grid = result;
     })
   }
 }

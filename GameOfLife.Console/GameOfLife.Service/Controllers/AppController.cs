@@ -2,6 +2,7 @@
 using GameOfLife.Service.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
 using WebAppExample.Models;
 
 namespace WebAppExample.Controllers
@@ -31,12 +32,15 @@ namespace WebAppExample.Controllers
         [HttpPost("setcells")]
         public IActionResult SetCells([FromBody] SetGridModel setGridModel)
         {
+            // Validation
+            // Api -> Domain
             var rowPosition = setGridModel.RowIndex;
             var columnPosition = setGridModel.ColumnIndex;
             var grid = setGridModel.Grid;
 
-            var setGrid = Game.SetCell(grid.ToArray(), rowPosition, columnPosition);
+            var setGrid = Game.SetCell(grid, rowPosition, columnPosition);
             var jsonGrid = JsonConvert.SerializeObject(setGrid);
+            Console.WriteLine(setGrid);
             return new OkObjectResult(jsonGrid);
         }
 
