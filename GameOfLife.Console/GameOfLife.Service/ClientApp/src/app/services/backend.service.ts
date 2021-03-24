@@ -23,6 +23,12 @@ export class BackEndService {
     const body = { grid, rowIndex, columnIndex };
     return this.http.post<Grid>(url, body);
   }
+
+  updateGrid(grid: Grid): Observable<Grid> {
+    const url = `${this.urlBase}updategrid/`;
+    const body = { grid };
+    return this.http.post<Grid>(url, body);
+  }
 }
 
 export class Grid {

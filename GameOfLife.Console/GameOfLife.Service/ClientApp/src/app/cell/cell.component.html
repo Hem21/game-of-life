@@ -7,7 +7,9 @@
     <label for="column" style="margin: 10px">Number of columns:</label>
     <input #columnAngularID id="column" type="number" />
   </div>
-  <button id="create-grid" type="submit" (click)="this.handleClick(rowAngularID.value, columnAngularID.value)">Create Grid</button>
+  <button id="create-grid" type="submit" (click)="this.createGridClick(rowAngularID.value, columnAngularID.value)">Create Grid</button>
+  <button id="update-grid" type="submit" (click)="this.updateGridClick()">Next</button>
+  <button id="reset-grid" type="submit" (click)="this.createGridClick(rowAngularID.value, columnAngularID.value)">Reset Grid</button>
   <div>
     <table>
       <tr *ngFor="let row of grid; index as rowIndex" style="border: 1px black solid;">

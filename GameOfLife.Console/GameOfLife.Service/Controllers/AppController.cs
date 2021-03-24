@@ -38,11 +38,19 @@ namespace WebAppExample.Controllers
 
             var setGrid = Game.SetCell(grid, rowPosition, columnPosition);
             var jsonGrid = JsonConvert.SerializeObject(setGrid);
-            Console.WriteLine(setGrid);
             return new OkObjectResult(jsonGrid);
         }
 
-        
+        [HttpPost("updategrid")]
+        public IActionResult UpdateGrid([FromBody] bool[,] grid)
+        {
+            var updateGrid = Game.UpdateGrid(grid);
+            var jsonGrid = JsonConvert.SerializeObject(updateGrid);
+            Console.WriteLine(updateGrid);
+            return new OkObjectResult(jsonGrid);
+        }
+
+
 
     }
 }

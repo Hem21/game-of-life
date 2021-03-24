@@ -21,7 +21,7 @@ export class CellComponent {
 
   }
 
-  handleClick(rowValue: number, columnValue: number) {
+  createGridClick(rowValue: number, columnValue: number) {
     this.row = rowValue;
     this.column = columnValue;
     console.log(this.row);
@@ -43,4 +43,12 @@ export class CellComponent {
       this.grid = result;
     })
   }
+
+  updateGridClick() {
+    this.backendService.updateGrid(this.grid).subscribe(result => {
+      this.grid = result;
+    })
+  }
+
+
 }
