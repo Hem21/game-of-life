@@ -7,14 +7,22 @@
     <label for="column" style="margin: 10px">Number of columns:</label>
     <input #columnAngularID id="column" type="number" />
   </div>
-  <button id="create-grid" type="submit" (click)="this.createGridClick(rowAngularID.value, columnAngularID.value)">Create Grid</button>
-  <button id="update-grid" type="submit" (click)="this.updateGridClick()">Next</button>
-  <button id="reset-grid" type="submit" (click)="this.createGridClick(rowAngularID.value, columnAngularID.value)">Reset Grid</button>
-  <div>
+  <div class="buttons">
+    <button class="btn" id="create-grid" type="submit" (click)="showButtons(); this.createGridClick(rowAngularID.value, columnAngularID.value)">Create Grid</button>
+  </div>
+</form>
+<ng-container *ngIf="show">
+  <div class="grid">
     <table>
-      <tr *ngFor="let row of grid; index as rowIndex" style="border: 1px black solid;">
-        <td *ngFor="let cell of row; index as columnIndex" style="border: 1px black solid;" (click)="this.selectCell(rowIndex, columnIndex)">{{cell}}</td>
+      <tr *ngFor="let row of grid; index as rowIndex">
+        <td *ngFor="let cell of row; index as columnIndex" (click)="this.selectCell(rowIndex, columnIndex)"
+            class="false"
+            [class.true]="cell == true">{{cell}}</td>
       </tr>
     </table>
   </div>
-</form>
+  <div class="buttons">
+    <button class="btn" id="update-grid" type="submit" (click)="this.updateGridClick()">Next</button>
+    <button class="btn" id="reset-grid" type="submit" (click)="this.createGridClick(rowAngularID.value, columnAngularID.value)">Reset Grid</button>
+  </div>
+</ng-container>

@@ -1,16 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+p {
+    display: flex;
 }
 
-code {
-  color: #e01a76;
+.form-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.btn {
+  color: white;
+  font-size:18px;
+  text-align: center;
+  background-color:#48D1CC;
+  border:1px #00CED1;
+  padding: 5px, 10px, 5px, 10px;
+  margin: 20px;
+  border-radius:5px;
 }
+
+button:hover {
+  background-color: #00CED1;
+  color: white;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+table tr td {
+  border: 1px black solid;
+  padding: 5px;
+  }
+
+.false {
+  background-color: grey;
+  font-size: 0px;
+  width: 50px;
+  height: 50px;
+}
+
+.true {
+  background-color: yellow;
+  font-size: 0px;
+  width: 50px;
+  height: 50px;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

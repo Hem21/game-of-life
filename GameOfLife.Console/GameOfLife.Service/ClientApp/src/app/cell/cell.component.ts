@@ -13,12 +13,25 @@ export class CellComponent {
   rowPosition: number;
   columnPosition: number;
   public setGrid: Grid;
+  public show: boolean = false;
 
 
   constructor(private backendService: BackEndService) { }
 
   ngOnInit() {
 
+  }
+
+  showButtons() {
+    this.show = true;
+  }
+
+  trueOrFalse(td: string) {
+    if (td = "true") {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   createGridClick(rowValue: number, columnValue: number) {
@@ -35,6 +48,7 @@ export class CellComponent {
       this.grid = result;
     });
   }
+ 
 
   selectCell(rowIndex: number, columnIndex: number) {
     this.rowPosition = rowIndex;

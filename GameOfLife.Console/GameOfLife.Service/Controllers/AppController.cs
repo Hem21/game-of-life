@@ -2,7 +2,6 @@
 using GameOfLife.Service.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
 using WebAppExample.Models;
 
 namespace WebAppExample.Controllers
@@ -42,15 +41,12 @@ namespace WebAppExample.Controllers
         }
 
         [HttpPost("updategrid")]
-        public IActionResult UpdateGrid([FromBody] bool[,] grid)
+        public IActionResult UpdateGrid([FromBody]bool[,] grid)
         {
-            var updateGrid = Game.UpdateGrid(grid);
-            var jsonGrid = JsonConvert.SerializeObject(updateGrid);
-            Console.WriteLine(updateGrid);
-            return new OkObjectResult(jsonGrid);
+            var updatedGrid = Game.UpdateGrid(grid);
+            return Ok(updatedGrid);
+            //var jsonGrid = JsonConvert.SerializeObject(updatedGrid);
+            //return new OkObjectResult(jsonGrid);
         }
-
-
-
     }
 }

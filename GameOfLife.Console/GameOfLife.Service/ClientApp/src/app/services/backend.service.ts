@@ -26,8 +26,7 @@ export class BackEndService {
 
   updateGrid(grid: Grid): Observable<Grid> {
     const url = `${this.urlBase}updategrid/`;
-    const body = { grid };
-    return this.http.post<Grid>(url, body);
+    return this.http.post<Grid>(url, grid);
   }
 }
 

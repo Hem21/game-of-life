@@ -19,7 +19,17 @@ namespace GameOfLife.Console
                 throw new Exception("Cell selected is not in range");
             }
 
-            grid[row, column] = true;
+            var cell = grid[row, column];
+
+            if(cell == false)
+            {
+                cell = true;
+            } else
+            {
+                cell = false;
+            }
+
+            grid[row, column] = cell;
 
             return grid;
         }
