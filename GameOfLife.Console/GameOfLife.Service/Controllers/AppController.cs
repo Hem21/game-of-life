@@ -32,8 +32,6 @@ namespace WebAppExample.Controllers
         [HttpPost("setcells")]
         public IActionResult SetCells([FromBody] SetGridModel setGridModel)
         {
-            // Validation
-            // Api -> Domain
             var rowPosition = setGridModel.RowIndex;
             var columnPosition = setGridModel.ColumnIndex;
             var grid = setGridModel.Grid;
