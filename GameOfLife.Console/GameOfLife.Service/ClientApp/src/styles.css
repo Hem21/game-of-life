@@ -77,29 +77,25 @@ button:hover {
   align-items: center;
 }
 
+tr {
+    height: 20px;
+}
+
+td {
+  border: 1px black solid;
+}
+
 table {
-    width: 100%;
-    height: 100%;
-}
-
-tr td {
-    width: 50%;
-    height: 50%;
-}
-
-table tr td {
   border: 1px black solid;
   padding: 5px;
+  table-layout: fixed;
+  width: 50%;
   }
 
 .false {
   background-color: grey;
-  width: 50%;
-  height: 50%;
 }
 
 .true {
   background-color: yellow;
-  width: 50%;
-  height: 50%;
 }
