@@ -13,8 +13,8 @@ export class CellComponent implements OnInit{
   public grid: Grid;
   rowPosition: number;
   columnPosition: number;
-  public setGrid: Grid;
-  public show: boolean = false;
+  public hide: boolean = false;
+  public show: boolean = true;
 
 
   constructor(private backendService: BackEndService) { }
@@ -23,9 +23,17 @@ export class CellComponent implements OnInit{
 
   }
 
-  showButtons() {
+  showAndHide() {
+    this.hide = true;
+    this.show = false;
+  }
+
+  showAndHideReverse() {
+    this.hide = false;
     this.show = true;
   }
+
+
 
   trueOrFalse(td: string) {
     if (td = "true") {
