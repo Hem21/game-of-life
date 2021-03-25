@@ -9,13 +9,6 @@ namespace WebAppExample.Controllers
     [ApiController]
     public class AppController : ControllerBase
     {
-
-       //public IActionResult Index()
-       // {
-       //     return View();
-       // }
-
-        
         [HttpPost ("creategrid")]
         public IActionResult CreateGrid([FromBody]GridModel gridModel)
         {

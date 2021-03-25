@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { take } from "rxjs/operators";
 import { BackEndService, Grid } from "../services/backend.service";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: "app-cell",
   templateUrl: "./cell.component.html"
 })
-export class CellComponent {
+export class CellComponent implements OnInit{
   row: number;
   column: number;
   public grid: Grid;

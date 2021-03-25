@@ -1,11 +1,14 @@
 <form class="input-grid">
   <div class="form-group">
-    <label for="row" style="margin: 10px">Number of rows:</label>
-    <input #rowAngularID id="row" type="number" />
+    <label for="row">Number of rows:</label>
+    <input #rowAngularID id="row" type="number" for="row" name="row" [ngModel]="row" #row ="ngModel" required maxlength="2"/>
   </div>
   <div class="form-group">
-    <label for="column" style="margin: 10px">Number of columns:</label>
-    <input #columnAngularID id="column" type="number" />
+    <label for="column">Number of columns:</label>
+    <input #columnAngularID id="column" type="number" for="column" name="column" [ngModel]="column" #column ="ngModel" required maxlength="2"/>
+  </div>
+  <div *ngIf="column.errors?.maxlength">
+    Please input number between 1 and 99.
   </div>
   <div class="buttons">
     <button class="btn" id="create-grid" type="submit" (click)="showButtons(); this.createGridClick(rowAngularID.value, columnAngularID.value)">Create Grid</button>
