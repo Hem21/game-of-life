@@ -1,10 +1,8 @@
-<body>
-  <div class="container" style="padding: 20px;">
+  <div class="container-fluid">
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand">{{mainTitle}}</a>
-      <a class="nav-link" [routerLink]="['/home']">Home</a>
+      <a class="nav-link fa fa-home" [routerLink]="['/home']"></a>
     </nav>
     <h1>{{pageTitle}}</h1>
     <router-outlet></router-outlet>
   </div>
-</body>

@@ -1,5 +1,6 @@
 <div class="container">
   <h1>{{pageTitle}}</h1>
-  <a [routerLink]="['/grid']">Start</a>
+  <img class="game-image" src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Gospers_glider_gun.gif" />
+  <a class="btn" id="start-link" [routerLink]="['/grid']">Start</a>
   <router-outlet></router-outlet>
 </div>

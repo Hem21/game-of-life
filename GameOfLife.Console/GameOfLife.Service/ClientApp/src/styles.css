@@ -1,6 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: monospace, sans-serif;
+}
+
+.nav-link {
+    color: black;
+    font-size: 40px;
+}
+
+h1 {
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.game-image {
+    padding-top: 10%;
+    margin:inherit;
+    display:flex;
+}
+
+#start-link {
+    margin-top: 10%;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+}
+
 p {
     display: flex;
 }
@@ -11,13 +44,17 @@ p {
   align-items: center;
 }
 
+label {
+    margin: 5px;
+}
+
 .btn {
   color: white;
   font-size:18px;
   text-align: center;
   background-color:#48D1CC;
   border:1px #00CED1;
-  padding: 5px, 10px, 5px, 10px;
+  padding: 5px, 10px;
   margin: 20px;
   border-radius:5px;
 }
@@ -58,6 +95,3 @@ table tr td {
   width: 50px;
   height: 50px;
 }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
