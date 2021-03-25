@@ -18,9 +18,7 @@
   <div class="grid">
     <table>
       <tr *ngFor="let row of grid; index as rowIndex">
-        <td *ngFor="let cell of row; index as columnIndex" (click)="this.selectCell(rowIndex, columnIndex)"
-            class="false"
-            [class.true]="cell == true">{{cell}}</td>
+        <td *ngFor="let cell of row; index as columnIndex" (click)="this.selectCell(rowIndex, columnIndex)" class="{{cell}}"></td>
       </tr>
     </table>
   </div>
