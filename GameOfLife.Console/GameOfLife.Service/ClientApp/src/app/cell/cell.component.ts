@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { take } from "rxjs/operators";
 import { BackEndService, Grid } from "../services/backend.service";
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: "app-cell",
   templateUrl: "./cell.component.html"
 })
 export class CellComponent implements OnInit{
+  private inputValidators = [Validators.required, Validators.min(1), Validators.max(20)];
+  public formGroup: FormGroup = new FormGroup({
+    rowAngularID: new FormControl("", this.inputValidators),
+    columnAngularID: new FormControl("", this.inputValidators)
+ });
   row: number;
   column: number;
   public grid: Grid;
@@ -23,13 +28,9 @@ export class CellComponent implements OnInit{
 
   }
 
-  showAndHide(rowValue: number, columnValue: number) {
-    console.log(rowValue);
-
-    if (rowValue != null || columnValue != null) {
-      this.hide = true;
-      this.show = false;
-    }
+  showAndHide() {
+    this.hide = true;
+    this.show = false;
   }
 
   showAndHideReverse() {
@@ -37,21 +38,13 @@ export class CellComponent implements OnInit{
     this.show = true;
   }
 
-  trueOrFalse(td: string) {
-    if (td = "true") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   createGridClick(rowValue: number, columnValue: number) {
-    this.row = rowValue;
-    this.column = columnValue;
-    console.log(this.row);
-    console.log(this.column);
-
-    this.callBackend(rowValue, columnValue);
+    if(this.formGroup.valid){
+      this.row = rowValue;
+      this.column = columnValue;
+      this.showAndHide();
+      this.callBackend(rowValue, columnValue);
+    }
   }
 
   callBackend(row: number, column: number) {

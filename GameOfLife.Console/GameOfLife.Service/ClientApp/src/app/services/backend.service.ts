@@ -1,6 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { of } from 'rxjs/internal/observable/of';
+import { throwError } from 'rxjs/internal/observable/throwError';
+import { catchError } from 'rxjs/internal/operators/catchError';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,7 @@ export class BackEndService {
   requestGrid(row: number, column: number): Observable<Grid> {
     const url = `${this.urlBase}creategrid/`;
     const body = { row: row, column: column };
-    return this.http.post<Grid>(url, body);
+    return this.http.post<Grid>(url, body).pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));;
   }
 
   setCells(grid: Grid, rowIndex: number, columnIndex: number): Observable<Grid> {
@@ -27,6 +30,12 @@ export class BackEndService {
   updateGrid(grid: Grid): Observable<Grid> {
     const url = `${this.urlBase}updategrid/`;
     return this.http.post<Grid>(url, grid);
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    //console.error(error.message);
+    console.info('in handle error');
+    return of(undefined);//throwError(error);
   }
 }
 

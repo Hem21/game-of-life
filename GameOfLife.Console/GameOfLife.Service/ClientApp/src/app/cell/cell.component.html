@@ -1,27 +1,20 @@
 <ng-container *ngIf="show">
   <p>Input number of rows and number of columns for grid then click create grid</p>
   <form class="input-grid">
-    <div class="form-group">
+    <div class="form-group" [formGroup]="this.formGroup">
       <label for="row">Number of rows:</label>
-      <input #rowAngularID id="row" type="number" for="row" name="row" [ngModel]="row" #row="ngModel"
-             required
-             min="1"
-             max="2"
-             oninvalid="this.setCustomValidity('Please enter number between 1 and 50')" />
-    </div>
-    <div class="form-group">
+      <mat-form-field>
+        <input #rowAngularID formControlName="rowAngularID" matInput type="number"/>
+        <mat-error>Please input value between and 20​​​​​​​​</mat-error>
+      </mat-form-field>
       <label for="column">Number of columns:</label>
-      <input #columnAngularID id="column" type="number" for="column" name="column" [ngModel]="column" #column="ngModel"
-             min="1"
-             max="50"
-             required
-             oninvalid="this.setCustomValidity('Please enter number between 1 and 50')" />
-    </div>
-    <div *ngIf="column.errors?.maxlength">
-      Please input number between 1 and 99.
+      <mat-form-field>
+      <input #columnAngularID formControlName="columnAngularID" matInput type="number"/>
+      <mat-error>Please input value between and 20​​​​​​​​</mat-error>
+    </mat-form-field>
     </div>
     <div class="buttons">
-      <button class="btn" id="create-grid" type="submit" (click)="showAndHide(rowAngularID.value, columnAngularID.value); this.createGridClick(rowAngularID.value, columnAngularID.value)">Create Grid</button>
+      <button class="btn" id="create-grid" type="submit" (click)="this.createGridClick(rowAngularID.value, columnAngularID.value)">Create Grid</button>
     </div>
   </form>
   </ng-container>

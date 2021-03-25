@@ -10,9 +10,27 @@ body {
   font-family: monospace, sans-serif;
 }
 
+.navbar-brand {
+    font-weight: bold;
+}
+
+.menu-items {
+  float: right;
+}
+
 .nav-link {
-    color: black;
-    font-size: 40px;
+  color: black;
+  font-size: 20px;
+  display: inline-block;
+}
+
+
+
+footer {
+  display: flex;
+  justify-content: center;
+  background-color: #F5F5F5;
+  border-radius: 5px;
 }
 
 h1 {
@@ -71,31 +89,26 @@ button:hover {
 }
 
 .grid {
-  margin-top: 50px;
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-tr {
-    height: 20px;
 }
 
 td {
-  border: 1px black solid;
+  height: 3vw;
+  width: 3vw;
+  border-radius: 15px;
 }
 
 table {
-  border: 1px black solid;
   padding: 5px;
   table-layout: fixed;
   width: 50%;
   }
 
 .false {
-  background-color: grey;
+  background-color: #FAF0E6;
 }
 
 .true {
-  background-color: yellow;
+  background-color: #F4A460;
 }
