@@ -7,6 +7,11 @@ namespace GameOfLife.Console
 
         public bool[,] CreateGrid(int xAxis, int yAxis)
         {
+            if(xAxis < 0 || yAxis < 0)
+            {
+                throw new Exception("Invalid grid inputs");
+            }
+
             return new bool[xAxis, yAxis];
         }
 

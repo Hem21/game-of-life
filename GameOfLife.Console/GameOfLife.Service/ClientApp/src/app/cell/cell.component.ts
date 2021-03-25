@@ -23,17 +23,19 @@ export class CellComponent implements OnInit{
 
   }
 
-  showAndHide() {
-    this.hide = true;
-    this.show = false;
+  showAndHide(rowValue: number, columnValue: number) {
+    console.log(rowValue);
+
+    if (rowValue != null || columnValue != null) {
+      this.hide = true;
+      this.show = false;
+    }
   }
 
   showAndHideReverse() {
     this.hide = false;
     this.show = true;
   }
-
-
 
   trueOrFalse(td: string) {
     if (td = "true") {
