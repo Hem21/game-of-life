@@ -7,7 +7,7 @@ namespace GameOfLife.Console
 
         public bool[,] CreateGrid(int xAxis, int yAxis)
         {
-            if(xAxis < 0 || yAxis < 0)
+            if (xAxis < 0 || yAxis < 0)
             {
                 throw new Exception("Invalid grid inputs");
             }
@@ -26,10 +26,11 @@ namespace GameOfLife.Console
 
             var cell = grid[row, column];
 
-            if(cell == false)
+            if (cell == false)
             {
                 cell = true;
-            } else
+            }
+            else
             {
                 cell = false;
             }
@@ -179,7 +180,8 @@ namespace GameOfLife.Console
                             {
                                 sumOfColumnNeighbors += 1;
                             }
-                        } else if (j == rows - 1)
+                        }
+                        else if (j == rows - 1)
                         {
                             var valueDiagBelowBefore = grid[i + 1, j - 1];
                             if (valueDiagBelowBefore.Equals(true))
@@ -194,7 +196,8 @@ namespace GameOfLife.Console
                             if (valueDiagBelowAfter && valueDiagBelowBefore)
                             {
                                 sumOfColumnNeighbors += 2;
-                            } else if (valueDiagBelowBefore || valueDiagBelowAfter)
+                            }
+                            else if (valueDiagBelowBefore || valueDiagBelowAfter)
                             {
                                 sumOfColumnNeighbors += 1;
                             }
@@ -344,7 +347,8 @@ namespace GameOfLife.Console
                         if (sumOfNeighbors < 2)
                         {
                             updatedGrid.SetValue(false, i, j);
-                        } else if (sumOfNeighbors <= 3)
+                        }
+                        else if (sumOfNeighbors <= 3)
                         {
                             updatedGrid.SetValue(true, i, j);
                         }
@@ -361,7 +365,7 @@ namespace GameOfLife.Console
                         }
                         else
                         {
-                            updatedGrid.SetValue(false, i , j);
+                            updatedGrid.SetValue(false, i, j);
                         }
                     }
                 }

@@ -23,6 +23,7 @@ export class CellComponent implements OnInit {
   previousGrid: Grid;
   public hide: boolean = false;
   public show: boolean = true;
+  public game: boolean = false;
 
 
   constructor(private backendService: BackEndService) { }
@@ -66,12 +67,6 @@ export class CellComponent implements OnInit {
   }
 
   updateGridClick() {
-    this.backendService.updateGrid(this.grid).subscribe(result => {
-      this.grid = result;
-    })
-  }
-
-  playGame() {
     var currentGrid = this.grid;
     if (JSON.stringify(currentGrid) == JSON.stringify(this.previousGrid)) {
       Swal.fire({
@@ -88,5 +83,34 @@ export class CellComponent implements OnInit {
       })
     }
     this.previousGrid = currentGrid;
-}
+  }
+
+  playGame() {
+    var game = this.game;
+    var currentGrid = this.grid;
+
+    if (game == false) {
+      game = true;
+    } else {
+      game = false;
+    }
+
+    while (game == true) {
+      if (JSON.stringify(currentGrid) == JSON.stringify(this.previousGrid)) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Game Over',
+          showConfirmButton: false,
+          footer: `
+          <a class="btn" id="start-link" href="home">Start New Game</a>
+          `
+        })
+        game = false;
+      }
+      this.backendService.updateGrid(this.grid).subscribe(result => {
+        this.grid = result;
+      })
+      this.previousGrid = currentGrid;
+    }
+  }
 }

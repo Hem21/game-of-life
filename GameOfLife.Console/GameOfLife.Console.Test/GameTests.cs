@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 using System;
 
 namespace GameOfLife.Console.Test
@@ -319,7 +318,7 @@ namespace GameOfLife.Console.Test
             var setGrid = Game.SetCell(grid, 1, 1);
             var actualGrid = Game.UpdateGrid(setGrid);
 
-            var expectedGrid = new[,] {{false, false, false}, {false, false, false}, {false, false, false}};
+            var expectedGrid = new[,] { { false, false, false }, { false, false, false }, { false, false, false } };
 
             CollectionAssert.AreEqual(expectedGrid, actualGrid);
         }

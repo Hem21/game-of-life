@@ -9,8 +9,8 @@ namespace WebAppExample.Controllers
     [ApiController]
     public class AppController : ControllerBase
     {
-        [HttpPost ("creategrid")]
-        public IActionResult CreateGrid([FromBody]GridModel gridModel)
+        [HttpPost("creategrid")]
+        public IActionResult CreateGrid([FromBody] GridModel gridModel)
         {
 
             int row;
@@ -57,7 +57,7 @@ namespace WebAppExample.Controllers
         }
 
         [HttpPost("updategrid")]
-        public IActionResult UpdateGrid([FromBody]bool[,] grid)
+        public IActionResult UpdateGrid([FromBody] bool[,] grid)
         {
             var updatedGrid = Game.UpdateGrid(grid);
             return Ok(updatedGrid);

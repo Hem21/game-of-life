@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace GameOfLife.Console
+﻿namespace GameOfLife.Console
 {
     class Program
     {
         static void Main(string[] args)
-        { 
+        {
 
         }
     }

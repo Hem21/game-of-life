@@ -19,7 +19,7 @@
   </form>
   </ng-container>
 <ng-container *ngIf="hide">
-  <p>Click on a dead cell to make it alive or click on a live cell to make it dead, when you're grid is set, click Next to play game</p>
+  <p>Click on a dead cell to make it alive or click on a live cell to make it dead, when you're grid is set, click Next to step through each loop of the game or click Play to play until you die!</p>
   <div class="grid">
     <table>
       <tr *ngFor="let row of grid; index as rowIndex">
@@ -28,7 +28,8 @@
     </table>
   </div>
   <div class="buttons">
-    <button class="btn" id="update-grid" type="submit" (click)="this.playGame()">Next</button>
+    <button class="btn" id="update-grid" type="submit" (click)="this.updateGridClick()">Next</button>
+    <button class="btn" id="update-grid" type="submit" (click)="this.playGame()">Play</button>
     <button class="btn" id="reset-grid" type="submit" (click)="showAndHideReverse()">Reset Grid</button>
   </div>
 </ng-container>

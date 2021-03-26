@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GameOfLife.Console
+﻿namespace GameOfLife.Console
 {
 
     public class Cell

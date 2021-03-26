@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GameOfLife.Service.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using Newtonsoft.Json;
 using WebAppExample.Controllers;
 using WebAppExample.Models;
-using GameOfLife.Service.Models;
 
 namespace GameOfLife.Console.Test
 {
@@ -45,7 +44,7 @@ namespace GameOfLife.Console.Test
             Assert.AreEqual(200, okResult.StatusCode);
 
             var gridResult = JsonConvert.DeserializeObject<bool[,]>(okResult.Value.ToString());
-       
+
             Assert.IsNotNull(gridResult);
             CollectionAssert.AreEqual(expected, gridResult);
         }
@@ -100,7 +99,7 @@ namespace GameOfLife.Console.Test
         [TestMethod]
         public void WhenFrontEndClicksNextButtonBackEndReturnsUpdatedGrid()
         {
-            var expected = new bool[2, 2] { { false , false }, { false, false } };
+            var expected = new bool[2, 2] { { false, false }, { false, false } };
             var controller = new AppController();
 
             var gridModel = new GridModel() { Row = "2", Column = "2" };
