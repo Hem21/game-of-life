@@ -107,10 +107,10 @@ namespace GameOfLife.Console
             var sumOfColumnNeighbors = 0;
 
             //checking column
-            for (var i = 0; i < columns; i++)
+            for (var i = 0; i < rows; i++)
             {
 
-                for (var j = 0; j < rows; j++)
+                for (var j = 0; j < columns; j++)
                 {
                     var isNotRow = i != rowNumber;
                     var isNotColumn = j != columnNumber;
@@ -123,7 +123,7 @@ namespace GameOfLife.Console
                             sumOfColumnNeighbors += 1;
                         }
                     }
-                    else if (i == columns - 1)
+                    else if (i == rows - 1)
                     {
                         var valueAbove = grid[i - 1, j];
                         if (valueAbove.Equals(true))
@@ -163,10 +163,10 @@ namespace GameOfLife.Console
             var sumOfColumnNeighbors = 0;
 
             //checking column
-            for (var i = 0; i < columns; i++)
+            for (var i = 0; i < rows; i++)
             {
 
-                for (var j = 0; j < rows; j++)
+                for (var j = 0; j < columns; j++)
                 {
                     var isNotRow = i != rowNumber;
                     var isNotColumn = j != columnNumber;
@@ -181,7 +181,7 @@ namespace GameOfLife.Console
                                 sumOfColumnNeighbors += 1;
                             }
                         }
-                        else if (j == rows - 1)
+                        else if (j == columns - 1)
                         {
                             var valueDiagBelowBefore = grid[i + 1, j - 1];
                             if (valueDiagBelowBefore.Equals(true))
@@ -207,7 +207,7 @@ namespace GameOfLife.Console
                             }
                         }
                     }
-                    else if (i == (columns - 1))
+                    else if (i == (rows - 1))
                     {
                         if (j == 0)
                         {
@@ -217,7 +217,7 @@ namespace GameOfLife.Console
                                 sumOfColumnNeighbors += 1;
                             }
                         }
-                        else if (j == rows - 1)
+                        else if (j == columns - 1)
                         {
                             var valueDiagAboveBefore = grid[i - 1, j - 1];
                             if (valueDiagAboveBefore.Equals(true))
@@ -262,7 +262,7 @@ namespace GameOfLife.Console
                                 sumOfColumnNeighbors += 0;
                             }
                         }
-                        else if (j == rows - 1)
+                        else if (j == columns - 1)
                         {
                             var valueDiagAboveBefore = grid[i - 1, j - 1].Equals(true);
                             var valueDiagBelowBefore = grid[i + 1, j - 1].Equals(true);
@@ -327,13 +327,13 @@ namespace GameOfLife.Console
 
         public static bool[,] UpdateGrid(bool[,] grid)
         {
-            var columns = grid.GetLength(0);
-            var rows = grid.GetLength(1);
-            var updatedGrid = new bool[columns, rows];
+            var rows = grid.GetLength(0);
+            var columns = grid.GetLength(1);
+            var updatedGrid = new bool[rows, columns];
 
-            for (var i = 0; i < columns; i++)
+            for (var i = 0; i < rows; i++)
             {
-                for (var j = 0; j < rows; j++)
+                for (var j = 0; j < columns; j++)
                 {
                     var sumOfRowNeighbors = CheckRowNeighbors(i, j, grid);
                     var sumOfColumnNeighbors = CheckColumnAboveAndBelowNeighbors(i, j, grid);

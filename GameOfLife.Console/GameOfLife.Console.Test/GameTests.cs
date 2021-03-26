@@ -126,7 +126,7 @@ namespace GameOfLife.Console.Test
         public void WhenCellHasNoColumnNeighborsThenZeroReturned()
         {
             var game = new Game();
-            var grid = game.CreateGrid(3, 3);
+            var grid = game.CreateGrid(3, 2);
             var setGrid = Game.SetCell(grid, 1, 1);
             var aboveBelow = Game.CheckColumnAboveAndBelowNeighbors(1, 1, setGrid);
             var diagonal = Game.CheckColumnDiagonalNeighbors(1, 1, setGrid);

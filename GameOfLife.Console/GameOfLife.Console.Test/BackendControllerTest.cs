@@ -119,10 +119,10 @@ namespace GameOfLife.Console.Test
             Assert.IsNotNull(okUpdatedGrid);
             Assert.AreEqual(200, okUpdatedGrid.StatusCode);
 
-            var updatedGridResult = JsonConvert.DeserializeObject<bool[,]>(okUpdatedGrid.Value.ToString());
+            //var updatedGridResult = JsonConvert.DeserializeObject<bool[,]>(okUpdatedGrid.Value.ToString());
             // Assert
-            Assert.IsNotNull(updatedGridResult);
-            CollectionAssert.AreEqual(expected, updatedGridResult);
+            //Assert.IsNotNull(updatedGridResult);
+            CollectionAssert.AreEqual(expected, (System.Collections.ICollection)okUpdatedGrid.Value);
         }
 
 
