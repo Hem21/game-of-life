@@ -1,7 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { of } from 'rxjs/internal/observable/of';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 
@@ -33,9 +32,7 @@ export class BackEndService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    //console.error(error.message);
-    console.info('in handle error');
-    return of(undefined);//throwError(error);
+    return throwError(error);
   }
 }
 
