@@ -1,28 +1,34 @@
-<form class="input-grid">
-  <div class="form-group">
-    <label for="row" style="margin: 10px">Number of rows:</label>
-    <input #rowAngularID id="row" type="number" />
-  </div>
-  <div class="form-group">
-    <label for="column" style="margin: 10px">Number of columns:</label>
-    <input #columnAngularID id="column" type="number" />
-  </div>
-  <div class="buttons">
-    <button class="btn" id="create-grid" type="submit" (click)="showButtons(); this.createGridClick(rowAngularID.value, columnAngularID.value)">Create Grid</button>
-  </div>
-</form>
 <ng-container *ngIf="show">
+  <p>Input number of rows and number of columns for grid then click create grid</p>
+  <form class="input-grid">
+    <div class="form-group" [formGroup]="this.formGroup">
+      <label for="row">Number of rows:</label>
+      <mat-form-field>
+        <input #rowAngularID formControlName="rowAngularID" matInput type="number"/>
+        <mat-error>Please input value between and 20​​​​​​​​</mat-error>
+      </mat-form-field>
+      <label for="column">Number of columns:</label>
+      <mat-form-field>
+      <input #columnAngularID formControlName="columnAngularID" matInput type="number"/>
+      <mat-error>Please input value between and 20​​​​​​​​</mat-error>
+    </mat-form-field>
+    </div>
+    <div class="buttons">
+      <button class="btn" id="create-grid" type="submit" (click)="this.createGridClick(rowAngularID.value, columnAngularID.value)">Create Grid</button>
+    </div>
+  </form>
+  </ng-container>
+<ng-container *ngIf="hide">
+  <p>Click on a dead cell to make it alive or click on a live cell to make it dead, when you're grid is set, click Next to play game</p>
   <div class="grid">
     <table>
       <tr *ngFor="let row of grid; index as rowIndex">
-        <td *ngFor="let cell of row; index as columnIndex" (click)="this.selectCell(rowIndex, columnIndex)"
-            class="false"
-            [class.true]="cell == true">{{cell}}</td>
+        <td *ngFor="let cell of row; index as columnIndex" (click)="this.selectCell(rowIndex, columnIndex)" class="{{cell}}"></td>
       </tr>
     </table>
   </div>
   <div class="buttons">
-    <button class="btn" id="update-grid" type="submit" (click)="this.updateGridClick()">Next</button>
-    <button class="btn" id="reset-grid" type="submit" (click)="this.createGridClick(rowAngularID.value, columnAngularID.value)">Reset Grid</button>
+    <button class="btn" id="update-grid" type="submit" (click)="this.playGame()">Next</button>
+    <button class="btn" id="reset-grid" type="submit" (click)="showAndHideReverse()">Reset Grid</button>
   </div>
 </ng-container>

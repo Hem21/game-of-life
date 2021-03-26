@@ -9,21 +9,37 @@ namespace WebAppExample.Controllers
     [ApiController]
     public class AppController : ControllerBase
     {
-
-       //public IActionResult Index()
-       // {
-       //     return View();
-       // }
-
-        
         [HttpPost ("creategrid")]
         public IActionResult CreateGrid([FromBody]GridModel gridModel)
         {
-            var row = int.Parse(gridModel.Row);
-            var column = int.Parse(gridModel.Column);
+
+            int row;
+            int column;
+
+            int rowParsed;
+            int columnParsed;
+
+            if (int.TryParse(gridModel.Row, out row))
+            {
+                rowParsed = row;
+            }
+            else
+            {
+                throw new System.Exception("Invalid row number entered");
+            }
+
+            if (int.TryParse(gridModel.Column, out column))
+            {
+                columnParsed = column;
+            }
+            else
+            {
+                throw new System.Exception("Invalid column number entered");
+            }
+
 
             var game = new Game();
-            var grid = game.CreateGrid(row, column);
+            var grid = game.CreateGrid(rowParsed, columnParsed);
             var jsonGrid = JsonConvert.SerializeObject(grid);
             return new OkObjectResult(jsonGrid);
         }
