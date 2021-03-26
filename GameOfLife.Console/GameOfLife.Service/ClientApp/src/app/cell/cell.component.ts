@@ -87,7 +87,6 @@ export class CellComponent implements OnInit {
 
   playGame() {
     var game = this.game;
-    var currentGrid = this.grid;
 
     if (game == false) {
       game = true;
@@ -95,22 +94,28 @@ export class CellComponent implements OnInit {
       game = false;
     }
 
-    while (game == true) {
-      if (JSON.stringify(currentGrid) == JSON.stringify(this.previousGrid)) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Game Over',
-          showConfirmButton: false,
-          footer: `
-          <a class="btn" id="start-link" href="home">Start New Game</a>
-          `
-        })
-        game = false;
+    var interval = setInterval(() => {
+
+      var currentGrid = this.grid;
+      const timeGrid = JSON.stringify(currentGrid);
+      const previousTimeGrid = JSON.stringify(this.previousGrid);
+
+      if (timeGrid === previousTimeGrid) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Game Over',
+            showConfirmButton: false,
+            footer: `
+            <a class="btn" id="start-link" href="home">Start New Game</a>
+            `
+          })
+          clearInterval(interval);
       }
-      this.backendService.updateGrid(this.grid).subscribe(result => {
-        this.grid = result;
-      })
-      this.previousGrid = currentGrid;
-    }
+        this.backendService.updateGrid(this.grid).subscribe(result => {
+          this.grid = result;
+          this.previousGrid = currentGrid;
+        })
+    }, 500)
+
   }
 }
