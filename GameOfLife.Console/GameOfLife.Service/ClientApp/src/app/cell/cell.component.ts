@@ -74,7 +74,14 @@ export class CellComponent implements OnInit {
   playGame() {
     var currentGrid = this.grid;
     if (JSON.stringify(currentGrid) == JSON.stringify(this.previousGrid)) {
-      Swal.fire('Game Over');
+      Swal.fire({
+        icon: 'error',
+        title: 'Game Over',
+        showConfirmButton: false,
+        footer: `
+          <a class="btn" id="start-link" href="home">Start New Game</a>
+          `
+      })
     } else {
       this.backendService.updateGrid(this.grid).subscribe(result => {
         this.grid = result;
