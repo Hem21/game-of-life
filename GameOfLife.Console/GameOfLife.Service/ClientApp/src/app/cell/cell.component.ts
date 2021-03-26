@@ -23,7 +23,6 @@ export class CellComponent implements OnInit {
   previousGrid: Grid;
   public hide: boolean = false;
   public show: boolean = true;
-  public game: boolean = false;
 
 
   constructor(private backendService: BackEndService) { }
@@ -86,14 +85,6 @@ export class CellComponent implements OnInit {
   }
 
   playGame() {
-    var game = this.game;
-
-    if (game == false) {
-      game = true;
-    } else {
-      game = false;
-    }
-
     var interval = setInterval(() => {
 
       var currentGrid = this.grid;
