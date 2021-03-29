@@ -102,7 +102,7 @@ export class CellComponent implements OnInit {
             icon: 'error',
             title: 'Game Over',
             showConfirmButton: false,
-            text: 'Your score is ' + (this.score - 2),
+            text: 'Your score is ' + (this.score - 1),
             footer: `
             <a class="btn" id="start-link" href="home">Start New Game</a>
             `
@@ -112,14 +112,15 @@ export class CellComponent implements OnInit {
         this.backendService.updateGrid(this.grid).subscribe(result => {
           this.grid = result;
           this.previousGrid = currentGrid;
-          this.calculateScore();
         })
     }, 500)
+    this.calculateScore();
     
   }
 
   calculateScore() {
 
     this.score = this.score + 1;
+    console.log(this.score);
   }
 }
