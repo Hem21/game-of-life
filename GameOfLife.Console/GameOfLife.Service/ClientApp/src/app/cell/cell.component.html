@@ -28,8 +28,8 @@
     </table>
   </div>
   <div class="buttons">
-    <button class="btn" id="update-grid" type="submit" (click)="this.updateGridClick()">Next</button>
-    <button class="btn" id="update-grid" type="submit" (click)="this.playGame()">Play</button>
+    <button class="btn" id="update-grid" type="submit" (click)="this.updateGridClick(); this.calculateScore() ">Next</button>
+    <button class="btn" id="update-grid" type="submit" (click)="this.playGame(); this.calculateScore()">Play</button>
     <button class="btn" id="reset-grid" type="submit" (click)="showAndHideReverse()">Reset Grid</button>
   </div>
 </ng-container>
