@@ -44,6 +44,15 @@ namespace WebAppExample.Controllers
             return new OkObjectResult(jsonGrid);
         }
 
+        [HttpPost("getstartgrid")]
+        public IActionResult GetStartGrid([FromBody] StartGridModel startGridModel)
+        {
+            var gridName = startGridModel.gridName;
+            var startGrid = Game.GetStartGrid(gridName);
+            var jsonGrid = JsonConvert.SerializeObject(startGrid);
+            return new OkObjectResult(jsonGrid);
+        }
+
         [HttpPost("setcells")]
         public IActionResult SetCells([FromBody] SetGridModel setGridModel)
         {

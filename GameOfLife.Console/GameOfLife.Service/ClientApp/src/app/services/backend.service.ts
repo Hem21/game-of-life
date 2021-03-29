@@ -20,6 +20,12 @@ export class BackEndService {
     return this.http.post<Grid>(url, body).pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));;
   }
 
+  getStartGrid(gridName: string): Observable<Grid> {
+    const url = `${this.urlBase}getstartgrid/`;
+    const body = { gridName };
+    return this.http.post<Grid>(url, body);
+  }
+
   setCells(grid: Grid, rowIndex: number, columnIndex: number): Observable<Grid> {
     const url = `${this.urlBase}setcells/`;
     const body = { grid, rowIndex, columnIndex };

@@ -386,6 +386,16 @@ namespace GameOfLife.Console.Test
             CollectionAssert.AreEqual(expectedGrid, actualGrid);
         }
 
+        [TestMethod]
+        public void WhenBlockIsCalledBlockGridIsReturned()
+        {
+            var grid = Game.GetStartGrid("block");
+
+            var expectedGrid = new[,] { { false, false, false, false }, { false, true, true, false }, { false, true, true, false }, { false, false, false, false } };
+
+            CollectionAssert.AreEqual(expectedGrid, grid);
+        }
+
 
     }
 

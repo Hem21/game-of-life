@@ -50,6 +50,24 @@ namespace GameOfLife.Console.Test
         }
 
         [TestMethod]
+        public void WhenFrontEndSelectsBlockPictureTheCorrectGridIsReturned()
+        {
+            var expected = new bool[,] { { false, false, false, false }, { false, true, true, false }, { false, true, true, false }, { false, false, false, false } };
+            var controller = new AppController();
+
+            var actual = controller.GetStartGrid("block");
+            var okResult = actual as OkObjectResult;
+
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual(200, okResult.StatusCode);
+
+            var gridResult = JsonConvert.DeserializeObject<bool[,]>(okResult.Value.ToString());
+
+            Assert.IsNotNull(gridResult);
+            CollectionAssert.AreEqual(expected, gridResult);
+        }
+
+        [TestMethod]
         public void WhenFrontEndSelectsCellsBackEndReturnsOk()
         {
             var controller = new AppController();

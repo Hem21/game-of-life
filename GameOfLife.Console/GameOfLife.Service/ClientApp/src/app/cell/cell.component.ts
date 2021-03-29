@@ -38,11 +38,6 @@ export class CellComponent implements OnInit {
     this.show = false;
   }
 
-  showAndHideReverse() {
-    this.hide = false;
-    this.show = true;
-  }
-
   createGridClick(rowValue: number, columnValue: number) {
     if (this.formGroup.valid) {
       this.row = rowValue;
@@ -74,7 +69,7 @@ export class CellComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Game Over',
-        text: 'Your score is:' + (this.score - 1),
+        text: 'Your score is:' + (this.score),
         showConfirmButton: false,
         footer: `
           <a class="btn" id="start-link" href="home">Start New Game</a>
@@ -102,7 +97,7 @@ export class CellComponent implements OnInit {
             icon: 'error',
             title: 'Game Over',
             showConfirmButton: false,
-            text: 'Your score is ' + (this.score - 2),
+            text: 'Your score is ' + (this.score - 1),
             footer: `
             <a class="btn" id="start-link" href="home">Start New Game</a>
             `
@@ -121,5 +116,12 @@ export class CellComponent implements OnInit {
   calculateScore() {
 
     this.score = this.score + 1;
+  }
+
+  getStartGrid(gridName: string) {
+    this.backendService.getStartGrid(gridName).subscribe(result => {
+      this.grid = result;
+    })
+    this.showAndHide();
   }
 }

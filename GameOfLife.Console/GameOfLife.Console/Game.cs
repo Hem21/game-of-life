@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GameOfLife.Console
 {
@@ -13,6 +14,35 @@ namespace GameOfLife.Console
             }
 
             return new bool[xAxis, yAxis];
+        }
+
+        public static bool[,] GetStartGrid(string gridName)
+        {
+            bool[,] selectedGrid = new bool[,] { };
+
+            Dictionary<string, bool[,]> grids = new Dictionary<string, bool[,]>()
+            {
+                {"block", new bool[,] { {false, false, false, false}, {false, true, true, false }, {false, true, true, false }, {false, false, false, false } } },
+                {"beacon", new bool[,] { {false, false, false, false, false, false}, { false, true, true, false, false, false },  { false, true, false, false, false, false }, { false, false, false, false, true, false }, { false, false, false, true, true, false }, { false, false, false, false, false, false } } },
+                {"glider", new bool[,] { {false, true, false, false, false, false}, { false, false, true, false, false, false },  { true, true, true, false, false, false }, { false, false, false, false, false, false }, { false, false, false, false, false, false }, { false, false, false, false, false, false } } }
+            };
+
+            switch(gridName)
+            {
+                case "block":
+                    selectedGrid = grids["block"];
+                    break;
+                case "beacon":
+                    selectedGrid = grids["beacon"];
+                    break;
+                case "glider":
+                    selectedGrid = grids["glider"];
+                    break;
+                default:
+                    throw new Exception("Invalid selection");
+            }
+
+            return selectedGrid;
         }
 
         public static bool[,] SetCell(bool[,] grid, int selectRowPosition, int selectColumnPosition)
