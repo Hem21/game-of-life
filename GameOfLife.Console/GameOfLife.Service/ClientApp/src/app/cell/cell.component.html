@@ -1,8 +1,10 @@
 <ng-container *ngIf="show">
   <p>Input number of rows and number of columns for grid then click create grid or select an image below to select a start up grid</p>
-  <img src="../../assets/block.png" alt="block image" (click)="this.getStartGrid('block')" />
-  <img src="../../assets/beacon.gif" alt="beacon image" (click)="this.getStartGrid('beacon')" />
-  <img src="../../assets/glider.gif" alt="glider image" (click)="this.getStartGrid('glider')" />
+  <div class="start-grids">
+    <img class="grid-image" src="../../assets/block.png" alt="block image" (click)="this.getStartGrid('block')" />
+    <img class="grid-image" src="../../assets/beacon.gif" alt="beacon image" (click)="this.getStartGrid('beacon')" />
+    <img class="grid-image" src="../../assets/glider.gif" alt="glider image" (click)="this.getStartGrid('glider')" />
+  </div>
   <form class="input-grid">
     <div class="form-group" [formGroup]="this.formGroup">
       <label for="row">Number of rows:</label>
