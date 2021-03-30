@@ -1,27 +1,35 @@
 <ng-container *ngIf="show">
   <p>Input number of rows and number of columns for grid then click create grid or select an image below to select a start up grid</p>
-  <div class="start-grids">
-    <img class="grid-image" src="../../assets/block.png" alt="block image" (click)="this.getStartGrid('block')" />
-    <img class="grid-image" src="../../assets/beacon.gif" alt="beacon image" (click)="this.getStartGrid('beacon')" />
-    <img class="grid-image" src="../../assets/glider.gif" alt="glider image" (click)="this.getStartGrid('glider')" />
+  <div main-container>
+    <div class="nav-left">
+      <div class="start-grids">
+        <img class="block" src="../../assets/block.png" alt="block image" (click)="this.getStartGrid('block')" />
+        <img class="beacon" src="../../assets/beacon.gif" alt="beacon image" (click)="this.getStartGrid('beacon')" />
+        <img class="glider" src="../../assets/glider.gif" alt="glider image" (click)="this.getStartGrid('glider')" />
+      </div>
+    </div>
+
+    <div class=" nav-right">
+      <form class="input-grid">
+        <div class="form-group" [formGroup]="this.formGroup">
+          <label for="row">Number of rows:</label>
+          <mat-form-field>
+            <input #rowAngularID formControlName="rowAngularID" matInput type="number" />
+            <mat-error>Please input value between and 20​​​​​​​​</mat-error>
+          </mat-form-field>
+          <label for="column">Number of columns:</label>
+          <mat-form-field>
+            <input #columnAngularID formControlName="columnAngularID" matInput type="number" />
+            <mat-error>Please input value between and 20​​​​​​​​</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="buttons">
+          <button class="btn" id="create-grid" type="submit" (click)="this.createGridClick(rowAngularID.value, columnAngularID.value)">Create Grid</button>
+        </div>
+      </form>
+    </div>
   </div>
-  <form class="input-grid">
-    <div class="form-group" [formGroup]="this.formGroup">
-      <label for="row">Number of rows:</label>
-      <mat-form-field>
-        <input #rowAngularID formControlName="rowAngularID" matInput type="number" />
-        <mat-error>Please input value between and 20​​​​​​​​</mat-error>
-      </mat-form-field>
-      <label for="column">Number of columns:</label>
-      <mat-form-field>
-        <input #columnAngularID formControlName="columnAngularID" matInput type="number" />
-        <mat-error>Please input value between and 20​​​​​​​​</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="buttons">
-      <button class="btn" id="create-grid" type="submit" (click)="this.createGridClick(rowAngularID.value, columnAngularID.value)">Create Grid</button>
-    </div>
-  </form>
+
 </ng-container>
 <ng-container *ngIf="hide">
   <p>Click on a dead cell to make it alive or click on a live cell to make it dead, when you're grid is set, click Next to step through each loop of the game or click Play to play until you die!</p>
