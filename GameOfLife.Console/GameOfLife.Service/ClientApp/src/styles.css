@@ -11,7 +11,7 @@ body {
 }
 
 .navbar-brand {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .menu-items {
@@ -23,8 +23,6 @@ body {
   font-size: 20px;
   display: inline-block;
 }
-
-
 
 footer {
   display: flex;
@@ -40,20 +38,20 @@ h1 {
 }
 
 .game-image {
-    padding-top: 10%;
-    margin:inherit;
-    display:flex;
+  padding-top: 10%;
+  margin:inherit;
+  display:flex;
 }
 
 #start-link {
-    margin-top: 10%;
-    font-size: 30px;
-    display: flex;
-    justify-content: center;
+  margin-top: 10%;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
 }
 
 p {
-    display: flex;
+  display: flex;
 }
 
 .form-group {
@@ -63,7 +61,7 @@ p {
 }
 
 label {
-    margin: 5px;
+  margin: 5px;
 }
 
 .block {
@@ -74,12 +72,12 @@ label {
   
 }
 
-  .block:hover {  
-    background: #48D1CC;
-    opacity: 0.6 !important;
-    filter: alpha(opacity=60) !important; 
-    box-shadow: 0 0 0px #000000 !important;
-  }
+.block:hover {  
+  background: #48D1CC;
+  opacity: 0.6 !important;
+  filter: alpha(opacity=60) !important; 
+  box-shadow: 0 0 0px #000000 !important;
+}
 
 .beacon {
   width: 5vw;
@@ -88,12 +86,12 @@ label {
   cursor: pointer;
 }
 
-  .beacon:hover {
-    background: #48D1CC;
-    opacity: 0.6 !important;
-    filter: alpha(opacity=60) !important;
-    box-shadow: 0 0 0px #000000 !important;
-  }
+.beacon:hover {
+  background: #48D1CC;
+  opacity: 0.6 !important;
+  filter: alpha(opacity=60) !important;
+  box-shadow: 0 0 0px #000000 !important;
+}
 
 .glider {
   width: 5vw;
@@ -112,7 +110,6 @@ label {
 .start-grids {
   display: flex;
   justify-content: space-evenly;
-
 }
 
 .btn {
@@ -175,7 +172,6 @@ table {
   width: 50%;
   padding-left: 20px;
   padding-right: 20px;
-  
 }
 
 .main-container{
