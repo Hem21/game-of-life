@@ -27,7 +27,7 @@ namespace GameOfLife.Console
                 {"glider", new bool[,] { {false, true, false, false, false, false}, { false, false, true, false, false, false },  { true, true, true, false, false, false }, { false, false, false, false, false, false }, { false, false, false, false, false, false }, { false, false, false, false, false, false } } }
             };
 
-            switch(gridName)
+            switch (gridName)
             {
                 case "block":
                     selectedGrid = grids["block"];
