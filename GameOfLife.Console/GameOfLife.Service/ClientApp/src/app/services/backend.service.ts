@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -40,9 +41,18 @@ export class BackEndService {
   private handleError(error: HttpErrorResponse) {
     return throwError(error);
   }
+
+  getWeatherGrid(gridWeatherStatus: string): Observable<Grid> {
+    const url = `${this.urlBase}getweathergrid/`;
+    const body = { gridWeatherStatus };
+    return this.http.post<Grid>(url, body);
+  }
+
 }
 
 export class Grid {
   columns: number;
   rows: number;
 }
+
+

@@ -1,16 +1,28 @@
-<div class="card" style="margin: 50px">
-  <div class="card-header">
-    {{pageTitle}}
-  </div>
   <div class="card-body">
-    <div class=" weather-wilmslow">
-      <h2>Weather in Wilmslow</h2>
-      <button class="btn" id="wilmslow-meteo" type="submit">Get me the meteo in Wilmslow</button>
+  <ng-container *ngIf="show">
+    <div class="buttons">
+      <button class="btn" id="create-grid" type="submit" (click)="this.showWeatherWilmslow(rowValue, columnValue, gridWeatherStatus)">Weather in Wilmslow</button>
     </div>
+  </ng-container>
 
-    <div class=" weather-milford">
-      <h2>Weather in Milford</h2>
-      <button class="btn" id="milford-meteo" type="submit">Get me the meteo in Milford</button>
+  <ng-container *ngIf="hide">
+    <div class="weatherWidgetRow">{{WeatherData.city}}, {{WeatherData.country}} </div>
+    <div class="weatherWidgetRow">{{WeatherData.temp_celcius}} °C</div>
+    <div class="weatherWidgetRow">{{WeatherData.description}}</div>
+
+        <div class="grid">
+      <table>
+        <tr *ngFor="let row of grid; index as rowIndex">
+          <td *ngFor="let cell of row; index as columnIndex" (click)="this.selectCell(rowIndex, columnIndex)" class="{{cell}}"></td>
+        </tr>
+      </table>
     </div>
-  </div>
+    <div class="buttons">
+      <button class="btn" id="update-grid" type="submit" (click)="this.updateGridClick(); this.calculateScore() ">Next</button>
+      <button class="btn" id="update-grid" type="submit" (click)="this.playGame(); this.calculateScore()">Play</button>
+      <button class="btn" id="reset-grid" type="submit" [routerLink]="['/home']">Reset</button>
+    </div>
+  </ng-container>
+
 </div>
+

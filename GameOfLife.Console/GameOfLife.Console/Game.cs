@@ -45,6 +45,48 @@ namespace GameOfLife.Console
             return selectedGrid;
         }
 
+        public static bool[,] GetWeatherGrid(string gridWeatherStatus)
+        {
+
+            bool[,] selectedGrid = new bool[,] { };
+
+            Dictionary<string, bool[,]> grids = new Dictionary<string, bool[,]>()
+            {
+                {"clouds", new bool[,] { {false, false, false, false, false, false, false },
+                                         {false, false, false, true, false, false, false },
+                                         {false, false, true, true, true, false, false },
+                                         {false, true, true, true, true, true, false },
+                                         {false, true, true, true, true, true, false },
+                                         {false, false, false, false, false, false, false } } },
+
+                {"sun", new bool[,] { {false, false, false, false, false, false, false },
+                                         {false, false, true, true, true, false, false },
+                                         {false, false, true, true, true, false, false },
+                                         {false, false, true, true, true, false, false },
+                                         {false, false, true, true, true, false, false },
+                                         {false, false, false, false, false, false, false } } }
+
+            }; 
+
+            switch (gridWeatherStatus)
+            {
+                case "clouds":
+                    selectedGrid = grids["clouds"];
+                    break;
+                case "sun":
+                    selectedGrid = grids["sun"];
+                    break;
+                
+                default:
+                    throw new Exception("Invalid selection");
+            }
+
+            return selectedGrid;
+        }
+    
+
+
+
         public static bool[,] SetCell(bool[,] grid, int selectRowPosition, int selectColumnPosition)
         {
             var row = selectRowPosition;
