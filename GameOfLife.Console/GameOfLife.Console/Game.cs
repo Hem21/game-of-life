@@ -59,24 +59,36 @@ namespace GameOfLife.Console
                                          {false, true, true, true, true, true, false },
                                          {false, false, false, false, false, false, false } } },
 
-                {"sun", new bool[,] { {false, false, false, false, false, false, false },
-                                         {false, false, true, true, true, false, false },
-                                         {false, false, true, true, true, false, false },
-                                         {false, false, true, true, true, false, false },
-                                         {false, false, true, true, true, false, false },
-                                         {false, false, false, false, false, false, false } } }
+                {"clear", new bool[,] { {false, false, false, true, false, false, false },
+                                         {false, false, true, false, true, false, false },
+                                         {false, true, false, false, false, true, false },
+                                         {false, false, true, false, true, false, false },
+                                         {false, false, false, true, false, false, false } } },
 
-            }; 
+                {"rain", new bool[,] { {false, false, false, false, false, false, false },
+                                         {false, false, false, true, false, false, false },
+                                         {false, false, true, true, true, false, false },
+                                         {false, true, true, true, true, true, false },
+                                         {false, true, true, true, true, true, false },
+                                         {false, false, false, false, false, false, false },
+                                         {false, true, false, true, false, true, false }, 
+                                         {false, true, false, true, false, true, false } } }
+
+
+    }; 
 
             switch (gridWeatherStatus)
             {
                 case "clouds":
                     selectedGrid = grids["clouds"];
                     break;
-                case "sun":
-                    selectedGrid = grids["sun"];
+                case "clear":
+                    selectedGrid = grids["clear"];
                     break;
-                
+                case "rain":
+                    selectedGrid = grids["rain"];
+                    break;
+
                 default:
                     throw new Exception("Invalid selection");
             }

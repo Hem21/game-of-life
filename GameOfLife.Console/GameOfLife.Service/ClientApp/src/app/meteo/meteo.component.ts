@@ -9,7 +9,7 @@ import { BackEndService, Grid } from '../services/backend.service';
   styleUrls: ['./meteo.component.css']
 })
 export class MeteoComponent implements OnInit {
-
+  /* weather: Weather = new Weather();*/
   WeatherData: any;
   public hide: boolean = false;
   public show: boolean = true;
@@ -17,20 +17,21 @@ export class MeteoComponent implements OnInit {
   row: number;
   column: number;
   public previousGrid: Grid;
+  weatherDescription: any;
+  currentGrid: Grid;
+
 
 
   constructor(private backendService: BackEndService,
-              private http: HttpClient) {
-
+    private http: HttpClient) {
 
   }
 
   ngOnInit() {
     this.WeatherData = {
       main: {},
-      
-
     };
+
 
   }
 
@@ -39,52 +40,66 @@ export class MeteoComponent implements OnInit {
     this.show = false;
   }
 
-  
-  showWeatherWilmslow(rowValue: number, columnValue: number, gridWeatherStatus) {
+  getWeatherData(chosenCityID: string) {
+    var address = 'https://api.openweathermap.org/data/2.5/weather?q=';
+    var api = '&APPID=0e1b3709b6a617e669dc0e11f9447a30';
+    return fetch(address + chosenCityID + api)
+      
+     
+  }
+
+  setWeatherData(data) {
+
+    this.WeatherData = data;
+
+    this.WeatherData.temperature = (this.WeatherData.main.temp - 273.15).toFixed(0);
+    this.weatherDescription = this.WeatherData.weather[0].main;
+    this.WeatherData.city = (this.WeatherData.name);
+    this.WeatherData.country = (this.WeatherData.sys.country);
+  }
+
+  showWeather(rowValue: number, columnValue: number, weatherDescription, chosenCityID) {
+
     this.row = rowValue;
     this.column = columnValue;
     this.showAndHide();
-    this.getWeatherDataWilmslow();
+  this.getWeatherData(chosenCityID)
+    .then(response => response.json())
+    .then(data => {
+      this.setWeatherData(data);
+     
+    
     console.log(this.WeatherData);
-    this.callWeatherBackend(gridWeatherStatus);
+
+     this.callWeatherBackend(this.weatherDescription);
+    });
   }
 
+  callWeatherBackend(weatherDescription) {
 
-  callWeatherBackend(gridWeatherStatus) {
-    if (this.WeatherData.description = "Clouds")
-    {
+    if (weatherDescription === "Clouds") {
       this.backendService.getWeatherGrid('clouds').subscribe(result => {
         this.grid = result;
       });
       this.playNonStop();
     }
 
-    else if (this.WeatherData.description = "Sun")
-    {
-      this.backendService.getWeatherGrid('sun').subscribe(result => {
+    else if (weatherDescription === "Clear") {
+      this.backendService.getWeatherGrid('clear').subscribe(result => {
         this.grid = result;
       });
       this.playNonStop();
     }
-      else 
+
+    else if (weatherDescription === "Rain") {
+      this.backendService.getWeatherGrid('rain').subscribe(result => {
+        this.grid = result;
+      });
+      this.playNonStop();
+    }
+    else
       console.log("the Meteo is broken");
-    
-}
 
-
-  getWeatherDataWilmslow() {
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=wilmslow,uk&APPID=0e1b3709b6a617e669dc0e11f9447a30')
-      .then(response=>response.json())
-      .then(data =>{this.setWeatherData(data);})
-
-  }
-
-  setWeatherData(data) {
-    this.WeatherData = data;
-    this.WeatherData.temp_celcius = (this.WeatherData.main.temp - 273.15).toFixed(0);
-    this.WeatherData.description = (this.WeatherData.weather[0].main);
-    this.WeatherData.city = (this.WeatherData.name);
-    this.WeatherData.country = (this.WeatherData.sys.country);
   }
 
   playNonStop() {
@@ -102,16 +117,18 @@ export class MeteoComponent implements OnInit {
 
       }
       else {
-        this.callWeatherBackend(this.grid);
+        this.callWeatherBackend(this.weatherDescription);
         clearInterval(interval);
+        
       }
+      
 
-     
     }, 1000)
 
+    
   }
- 
-  }
+}
+
 
 
   

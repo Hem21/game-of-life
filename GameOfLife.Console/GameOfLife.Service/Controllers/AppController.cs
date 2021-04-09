@@ -83,16 +83,5 @@ namespace WebAppExample.Controllers
             return new OkObjectResult(jsonGrid);
         }
 
-
-
-        //[HttpPost("getweathergrid")]
-        //public IActionResult GetWeatherGrid([FromBody] OpenWeatherResponseModel openWeatherResponseModel)
-        //{
-
-        //    var weatherStatus = openWeatherResponseModel.Weather;
-        //    var weatherGrid = Game.GetWeatherGrid(weatherStatus);
-        //    var jsonGrid = JsonConvert.SerializeObject(weatherGrid);
-        //    return new OkObjectResult(jsonGrid);
-        //}
     }
 }
