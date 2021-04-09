@@ -24,7 +24,6 @@ body {
   display: inline-block;
 }
 
-weather3
 h2 {
   margin-top: 2%;
   display: flex;
@@ -32,7 +31,6 @@ h2 {
   font-size: 20px;
 }
 
- main
 footer {
   display: flex;
   justify-content: center;
@@ -161,6 +159,7 @@ table {
   width: 50%;
   }
 
+
 .false {
   background-color: #FAF0E6;
 }
@@ -187,3 +186,32 @@ table {
 .main-container{
 display: inline;
 }
+
+.weatherWidgetRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  padding:15px, 5px, 15px, 5px;
+  margin-bottom: 15px;
+}
+
+.weather-table {
+  background-color: #FFFAFA;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+
+.choosecity, #chosenCityID {
+  margin-right: 10px;
+  display: block;
+}
+
+
+.city {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

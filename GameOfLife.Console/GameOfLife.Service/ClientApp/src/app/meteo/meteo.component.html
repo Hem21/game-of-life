@@ -1,16 +1,34 @@
-<div class="card" style="margin: 50px">
-  <div class="card-header">
-    {{pageTitle}}
-  </div>
   <div class="card-body">
-    <div class=" weather-wilmslow">
-      <h2>Weather in Wilmslow</h2>
-      <button class="btn" id="wilmslow-meteo" type="submit">Get me the meteo in Wilmslow</button>
+  <ng-container *ngIf="show">
+    <div class="city">
+      <label class="choosecity">Choose a city</label>
+      <input #chosenCityID matInput type="text" />
     </div>
+    <div class="buttons">
+      <button class="btn" id="create-grid" type="submit" (click)="this.showWeather(rowValue, columnValue, weatherDescription, chosenCityID.value);">Show weather</button>
+    </div>
+  </ng-container>
 
-    <div class=" weather-milford">
-      <h2>Weather in Milford</h2>
-      <button class="btn" id="milford-meteo" type="submit">Get me the meteo in Milford</button>
+  <ng-container *ngIf="hide">
+    <div class="weather-table">
+      <div class="unkown">
+        <div class="weatherWidgetRow ">{{WeatherData.city}}, {{WeatherData.country}} </div>
+        <div class="weatherWidgetRow ">{{WeatherData.temperature}} °C</div>
+        <div class="weatherWidgetRow ">{{weatherDescription}}</div>
+      </div>
+      <div class="grid">
+        <table class="weather-game">
+          <tr *ngFor="let row of grid; index as rowIndex">
+            <td *ngFor="let cell of row; index as columnIndex" class="{{cell}}"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="buttons">
+        <button class="btn" id="reset-grid" type="submit" [routerLink]="['/home']">Reset</button>
+      </div>
     </div>
-  </div>
+  </ng-container>
+ 
+
 </div>
+

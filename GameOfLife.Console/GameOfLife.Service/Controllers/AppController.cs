@@ -73,5 +73,15 @@ namespace WebAppExample.Controllers
             //var jsonGrid = JsonConvert.SerializeObject(updatedGrid);
             //return new OkObjectResult(jsonGrid);
         }
+
+        [HttpPost("getweathergrid")]
+        public IActionResult GetWeatherGrid([FromBody] WeatherGridModel weatherGridModel)
+        {
+            var gridWeather = weatherGridModel.gridWeatherStatus;
+            var weatherGrid = Game.GetWeatherGrid(gridWeather);
+            var jsonGrid = JsonConvert.SerializeObject(weatherGrid);
+            return new OkObjectResult(jsonGrid);
+        }
+
     }
 }

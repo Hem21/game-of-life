@@ -45,6 +45,60 @@ namespace GameOfLife.Console
             return selectedGrid;
         }
 
+        public static bool[,] GetWeatherGrid(string gridWeatherStatus)
+        {
+
+            bool[,] selectedGrid = new bool[,] { };
+
+            Dictionary<string, bool[,]> grids = new Dictionary<string, bool[,]>()
+            {
+                {"clouds", new bool[,] { {false, false, false, false, false, false, false },
+                                         {false, false, false, true, false, false, false },
+                                         {false, false, true, true, true, false, false },
+                                         {false, true, true, true, true, true, false },
+                                         {false, true, true, true, true, true, false },
+                                         {false, false, false, false, false, false, false } } },
+
+                {"clear", new bool[,] { {false, false, false, true, false, false, false },
+                                         {false, false, true, false, true, false, false },
+                                         {false, true, false, false, false, true, false },
+                                         {false, false, true, false, true, false, false },
+                                         {false, false, false, true, false, false, false } } },
+
+                {"rain", new bool[,] { {false, false, false, false, false, false, false },
+                                         {false, false, false, true, false, false, false },
+                                         {false, false, true, true, true, false, false },
+                                         {false, true, true, true, true, true, false },
+                                         {false, true, true, true, true, true, false },
+                                         {false, false, false, false, false, false, false },
+                                         {false, true, false, true, false, true, false }, 
+                                         {false, true, false, true, false, true, false } } }
+
+
+    }; 
+
+            switch (gridWeatherStatus)
+            {
+                case "clouds":
+                    selectedGrid = grids["clouds"];
+                    break;
+                case "clear":
+                    selectedGrid = grids["clear"];
+                    break;
+                case "rain":
+                    selectedGrid = grids["rain"];
+                    break;
+
+                default:
+                    throw new Exception("Invalid selection");
+            }
+
+            return selectedGrid;
+        }
+    
+
+
+
         public static bool[,] SetCell(bool[,] grid, int selectRowPosition, int selectColumnPosition)
         {
             var row = selectRowPosition;

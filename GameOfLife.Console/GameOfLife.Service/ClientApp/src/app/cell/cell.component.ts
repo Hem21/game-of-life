@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 
+
 @Component({
   selector: "app-cell",
   templateUrl: "./cell.component.html"
@@ -27,7 +28,7 @@ export class CellComponent implements OnInit {
   
 
 
-  constructor(private backendService: BackEndService) { }
+  constructor(private backendService: BackEndService ) { }
 
   ngOnInit() {
 
@@ -124,4 +125,7 @@ export class CellComponent implements OnInit {
     })
     this.showAndHide();
   }
+
+
+      
 }
