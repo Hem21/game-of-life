@@ -215,3 +215,26 @@ display: inline;
   align-items: center;
 }
 
+button {
+  color: white;
+  font-family: monospace, sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  background-color: #48D1CC;
+  border: 1px #00CED1;
+  padding: 30px, 35px;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.fa-angle-double-left, .fa-angle-double-right {
+  font-size: 25px;
+}
+
+.main-container-city{
+    width: 100%;
+}
+
+
+

@@ -1,11 +1,13 @@
-  <div class="card-body">
+  <div  class="card-body">
   <ng-container *ngIf="show">
-    <div class="city">
-      <label class="choosecity">Choose a city</label>
-      <input #chosenCityID matInput type="text" />
-    </div>
-    <div class="buttons">
-      <button class="btn" id="create-grid" type="submit" (click)="this.showWeather(rowValue, columnValue, weatherDescription, chosenCityID.value);">Show weather</button>
+    <div class="main-container-city">
+      <div class="city">
+        <label class="choosecity">Choose a city</label>
+        <input #chosenCityID matInput type="text" />
+      </div>
+      <div class="buttons">
+        <button class="btn" id="create-grid" type="submit" (click)="this.showWeather(rowValue, columnValue, weatherDescription, chosenCityID.value);">Show weather</button>
+      </div>
     </div>
   </ng-container>
 

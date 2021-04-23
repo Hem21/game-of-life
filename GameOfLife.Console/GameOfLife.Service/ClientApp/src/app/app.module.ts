@@ -12,6 +12,8 @@ import { RulesComponent } from './rules/rules.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MeteoComponent } from './meteo/meteo.component';
+import { TutorialComponent } from './tutorial/tutorial.component';
+import { JoyrideModule, JoyrideStepComponent } from 'ngx-joyride';
 
 
 
@@ -22,26 +24,37 @@ import { MeteoComponent } from './meteo/meteo.component';
     CellComponent,
     GridSetUpComponent,
     RulesComponent,
-    MeteoComponent
+    MeteoComponent,
+    TutorialComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    JoyrideModule.forRoot(),
     RouterModule.forRoot([
       { path: "home", component: HomeComponent },
       { path: "grid", component: GridSetUpComponent },
       { path: "rules", component: RulesComponent },
-      {path: "meteo", component: MeteoComponent },
+      { path: "meteo", component: MeteoComponent },
+      { path: "tutorial", component: TutorialComponent },
       { path: " ", redirectTo: "home", pathMatch: "full" },
-      { path: "**", redirectTo: "home", pathMatch: "full" }
+      { path: "**", redirectTo: "home", pathMatch: "full" },
+     
     ], { useHash: true }),
+    
+    
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
+    
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+  entryComponents: [JoyrideStepComponent],
+
 })
 export class AppModule { }

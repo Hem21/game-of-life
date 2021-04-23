@@ -54,8 +54,8 @@ namespace GameOfLife.Console.Test
         {
             var expected = new bool[,] { { false, false, false, false }, { false, true, true, false }, { false, true, true, false }, { false, false, false, false } };
             var controller = new AppController();
-
-            var actual = controller.GetStartGrid("block");
+            var startGridModel = new StartGridModel { gridName = "block" };
+            var actual = controller.GetStartGrid(startGridModel);
             var okResult = actual as OkObjectResult;
 
             Assert.IsNotNull(okResult);
