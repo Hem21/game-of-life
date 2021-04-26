@@ -15,14 +15,20 @@ body {
 }
 
 .menu-items {
-  float: right;
+  font-size: 10px;
 }
+
 
 .nav-link {
   color: black;
   font-size: 20px;
   display: inline-block;
+  
 }
+
+  .nav-link:hover {
+    color: #00CED1;
+  }
 
 h2 {
   margin-top: 2%;
@@ -236,5 +242,32 @@ button {
     width: 100%;
 }
 
+.mat-toolbar.mat-primary {
+  background: #F5F5F5;
+  
+}
+
+.site-title {
+  color: black;
+  font-family: monospace, sans-serif;
+  float: left;
+  font-weight: bold;
+  font-size: 25px;
+}
+#tutorial-menu:hover {
+  color: #48D1CC;
+  cursor: pointer;
+}
 
 
+mat-sidenav-content {
+  background-color: #fff;
+}
+
+.flexSpaceBetween {
+  justify-content: space-between;
+}
+
+.mat-list-item {
+  font-family: monospace, sans-serif;
+}

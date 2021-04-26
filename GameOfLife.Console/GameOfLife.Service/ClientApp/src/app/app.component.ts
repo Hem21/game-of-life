@@ -15,6 +15,8 @@ export class AppComponent {
 
   public hide: boolean = false;
   public show: boolean = true;
+  isExpanded = true;
+
 
   stepContent = [
     'Press the next button to discover the different features of the app',

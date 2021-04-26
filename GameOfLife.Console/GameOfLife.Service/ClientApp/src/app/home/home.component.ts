@@ -9,7 +9,8 @@ import { JoyrideModule, JoyrideStepComponent } from "ngx-joyride";
 
 })
 
-@Component({
+  @Component({
+    selector: 'app-home',
   templateUrl: './home.component.html'
 })
 
