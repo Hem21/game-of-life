@@ -1,8 +1,10 @@
 import { SelectorContext } from '@angular/compiler';
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { JoyrideDirective, JoyrideModule, JoyrideService } from 'ngx-joyride';
 import { JoyrideOptions } from 'ngx-joyride/lib/models/joyride-options.class';
 import Swal from 'sweetalert2';
+import { TutorialBoxComponent } from './tutorial-box/tutorial-box.component';
 
 
 @Component({
@@ -26,7 +28,7 @@ export class AppComponent {
   ];
 
 
-  constructor(private readonly joyrideService: JoyrideService) { }
+  constructor(private readonly joyrideService: JoyrideService, public dialog: MatDialog) { }
 
 
   showAndHide() {
@@ -60,6 +62,10 @@ export class AppComponent {
     
   }
 
-
+  openTutorialBox() {
+    this.dialog.open(TutorialBoxComponent);
+  }
 }
+
+
 

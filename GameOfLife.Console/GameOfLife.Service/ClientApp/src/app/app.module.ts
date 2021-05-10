@@ -14,6 +14,8 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MeteoComponent } from './meteo/meteo.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
 import { JoyrideModule, JoyrideStepComponent } from 'ngx-joyride';
+
+
 import { A11yModule } from '@angular/cdk/a11y';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PortalModule } from '@angular/cdk/portal';
@@ -37,6 +39,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 
+
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
@@ -55,6 +58,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import { TutorialBoxComponent } from './tutorial-box/tutorial-box.component';
+import { CarouselDirective } from './carousel.directive';
 
 
 
@@ -66,7 +71,9 @@ import { MatTreeModule } from '@angular/material/tree';
     GridSetUpComponent,
     RulesComponent,
     MeteoComponent,
-    TutorialComponent
+    TutorialComponent,
+    TutorialBoxComponent,
+    CarouselDirective,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -121,6 +128,7 @@ import { MatTreeModule } from '@angular/material/tree';
       { path: "rules", component: RulesComponent },
       { path: "meteo", component: MeteoComponent },
       { path: "tutorial", component: TutorialComponent },
+      { path: "tutorial-box", component: TutorialBoxComponent },
       { path: " ", redirectTo: "home", pathMatch: "full" },
       { path: "**", redirectTo: "home", pathMatch: "full" },
      

@@ -17,7 +17,7 @@
 
   <mat-sidenav #sidenav position="end" class="example-sidenav"
                mode="side"
-               [opened]="isExpanded">
+               [opened]="!isExpanded">
 
     <mat-nav-list>
       <a mat-list-item joyrideStep="step1" title="Welcome to the Tutorial" [text]="stepContent[0]"
@@ -25,7 +25,7 @@
          [nextTemplate]="nextButton"
          [doneTemplate]="doneButton"
          (click)="tour()" >Guided tour</a>
-			<a mat-list-item href="...">Tutorials</a>
+			<a mat-list-item (click)="openTutorialBox()">Tutorials</a>
     </mat-nav-list>
 
   </mat-sidenav>
