@@ -1,18 +1,29 @@
 
-<div mat-dialog-content>
+<div mat-dialog-container>
 
-  <div *carousel="let slide from images; let ctrl = controller">
-    <div class="title"><h2>{{slide.title}}</h2></div>
-    <div class=" = carousel-image"><img [src]="slide.image"></div>
-    <div class="tutorial-content">{{slide.content}}</div>
-    <button (click)="ctrl.prev()">Previous</button>
-    <button (click)="ctrl.next()">Next</button>
+  <div mat-dialog-title>
+    <span class="close-tutorial-button" mat-dialog-close>X</span>
+  </div>
+  
+  
+
+  <div mat-dialog-content>
+    <div *carousel="let slide from images; let ctrl = controller">
+      <div class="title"><h2>{{slide.title}}</h2></div>
+      <div class="carousel-image"><img [src]="slide.image"></div>
+      <div class="tutorial-content">{{slide.content}}</div>
+
+      <div mat-dialog-actions>
+
+
+        <button class="fas fa-angle-double-left" id="previous-button" (click)="ctrl.prev()"></button>
+        <button class="fas fa-angle-double-right" id="next-button" (click)="ctrl.next()"></button>
+
+      </div>
+
+    </div>
   </div>
 
-</div>
 
-<div mat-dialog-actions>
-
-  <button mat-button mat-dialog-close>X</button>
 
 </div>

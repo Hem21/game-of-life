@@ -271,3 +271,123 @@ mat-sidenav-content {
 .mat-list-item {
   font-family: monospace, sans-serif;
 }
+
+
+/*.mat-dialog-actions {
+  justify-content: flex-end;
+  padding: 0px 0;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 15px;
+  margin-bottom: -50px;
+  width:100%;
+  height:100%;
+}*/
+
+
+
+.close-tutorial-button {
+  color: black;
+  float: right;
+}
+
+.close-tutorial-button:hover {
+    color: #48D1CC;
+  }
+
+
+.cdk-overlay-pane mat-dialog-container.mat-dialog-container {
+  margin: 20px 5px;
+  padding: 5px;
+  width: 25%;
+  height: 55%;
+  position: fixed !important;
+  right: 1%;
+  bottom: 20%;
+  overflow-y: hidden;
+}
+
+.cdk-overlay-pane mat-dialog-container.mat-dialog-container img {
+  vertical-align: middle;
+  border-style: none;
+  max-width: 100%;
+}
+
+.cdk-overlay-pane mat-dialog-container.mat-dialog-container button{
+    top: 10%;
+    float: right;
+    }
+
+  .cdk-overlay-pane mat-dialog-container.mat-dialog-container h2 {
+    
+    margin-top:0px;
+  }
+
+.cdk-overlay-pane .mat-dialog-title {
+  padding-right: 10px;
+  padding-top: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 3px;
+  align-items: center;
+  margin: 0px;
+  padding-bottom: 0px;
+  justify-content: flex-end;
+  font-size:12px;
+}
+
+.cdk-overlay-pane .mat-dialog-content {
+  max-width: 100%;
+  max-height: 100%;
+  padding-top: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0px;
+  padding-right: 2px;
+  padding-left: 2px;
+
+  
+}
+
+.cdk-overlay-pane .mat-dialog-actions {
+  max-width: 100%;
+  max-height: 100%;
+  padding-top: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0px;
+  padding-right: 2px;
+  padding-left: 2px;
+  padding-bottom: 0px;
+  justify-content: flex-end;
+}
+
+  .cdk-overlay-pane .mat-dialog-actions {
+    max-width: 100%;
+    max-height: 100%;
+    padding-top: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 5px;
+    padding-right: 2px;
+    padding-left: 2px;
+    padding-bottom: 0px;
+    justify-content: flex-end;
+  }
+
+.cdk-overlay-pane .next-button .previous-button{
+        margin:5px;
+        position: fixed;
+
+    }
+
+.cdk-overlay-dark-backdrop {
+  background-color: transparent;
+}
+
+.cdk-overlay-backdrop .cdk-overlay-backdrop-showing {
+  background-color: transparent;
+}
