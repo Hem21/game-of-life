@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { take } from "rxjs/operators";
 import { BackEndService, Grid } from "../services/backend.service";
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { JoyrideModule, JoyrideStepComponent } from 'ngx-joyride';
 
 
 
@@ -10,6 +11,7 @@ import Swal from 'sweetalert2';
   selector: "app-cell",
   templateUrl: "./cell.component.html"
 })
+
 export class CellComponent implements OnInit {
   private inputValidators = [Validators.required, Validators.min(1), Validators.max(20)];
   public formGroup: FormGroup = new FormGroup({

@@ -1,0 +1,38 @@
+
+
+<div mat-dialog-container>
+  <div class="dialog-box">
+    <div mat-dialog-title>
+      <span class="close-tutorial-button" mat-dialog-close>X</span>
+    </div>
+
+
+    <div mat-dialog-content>
+      <div *carousel="let image from images; let ctrl = controller">
+        <div class="title"><h2>{{image.title}}</h2></div>
+        <div class="carousel-image"><img [src]="image.picture"></div>
+        <div class="tutorial-content">{{image.content}}</div>
+
+        <div mat-dialog-actions>
+          <div class="slide-number">
+            <p *ngIf="this.image != this.images[0]">{{this.image.id}} / {{this.images.length - 1}}</p>
+          </div>
+
+          <div class="actions-buttons">
+            <button *ngIf="this.image != this.images[images.length - 1]" class="fas fa-angle-double-right" id="next-button" (click)="ctrl.next()"></button>
+            <button *ngIf="this.image == this.images[images.length - 1]" id="done-button" mat-dialog-close>Done</button>
+            <button *ngIf="this.image != this.images[0]" class="fas fa-angle-double-left" id="previous-button" (click)="ctrl.prev()"></button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--<div class="arrows-focus">
+    <i class="fas fa-long-arrow-alt-up"></i>
+  </div>-->
+
+</div>
+
+

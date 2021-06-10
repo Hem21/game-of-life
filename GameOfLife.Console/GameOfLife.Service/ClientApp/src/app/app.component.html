@@ -1,13 +1,54 @@
-  <div class="container-fluid">
-  <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand">{{mainTitle}}</a>
-    <span class="menu-items">
-      <a class="nav-link fa fa-home" [routerLink]="['/home']"> Home</a>
-      <a class="nav-link fas fa-clipboard-list" [routerLink]="['/rules']"> Rules</a>
-      <a class="nav-link fas fa-rainbow" [routerLink]="['/meteo']"> Weather</a>
-    </span>
+<mat-toolbar class="flexSpaceBetween">
+  <span class="site-title">{{mainTitle}}</span>
+  <nav>
+      <span class="menu-items">
+        <a joyrideStep="step2" title="Homepage" [text]="stepContent[1]" class="nav-link fa fa-home" [routerLink]="['/home']"> Home</a>
+        <a joyrideStep="step6" title="Check the rules" [text]="stepContent[2]" class="nav-link fas fa-clipboard-list" [routerLink]="['/rules']"> Rules</a>
+        <a joyrideStep="step7" title="Get the weather" [text]="stepContent[3]" (done)="finishTour()" class="nav-link fas fa-rainbow" [routerLink]="['/meteo']"> Weather</a>
+        <a id="tutorial-menu" class="nav-link fas fa-question-circle" (click)="isExpanded = !isExpanded"> Tutorials</a>
+      </span>
+    
   </nav>
-  <h1>{{pageTitle}}</h1>
-  <router-outlet></router-outlet>
-  <footer>Brought to you by Audrey & Megan</footer>
-</div>
+
+</mat-toolbar>
+
+
+
+
+<mat-sidenav-container class="example-container">
+
+  <mat-sidenav #sidenav position="end" class="example-sidenav"
+               mode="side"
+               [opened]="!isExpanded">
+
+    <mat-nav-list>
+      <a mat-list-item joyrideStep="step1" title="Welcome to the Tutorial" [text]="stepContent[0]"
+         [prevTemplate]="prevButton"
+         [nextTemplate]="nextButton"
+         [doneTemplate]="doneButton"
+         (click)="tour()" >Guided tour</a>
+			<a mat-list-item (click)="openTutorialBox()">Tutorials</a>
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+
+<ng-template #prevButton>
+  <button class="fas fa-angle-double-left"></button>
+</ng-template>
+<ng-template #nextButton>
+  <button class="fas fa-angle-double-right"></button>
+</ng-template>
+<ng-template #doneButton>
+  <button>Done</button>
+</ng-template>
+
+
+<footer>Brought to you by Audrey & Megan</footer>
+

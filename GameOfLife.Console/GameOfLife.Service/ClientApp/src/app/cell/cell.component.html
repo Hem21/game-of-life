@@ -1,7 +1,7 @@
 <ng-container *ngIf="show">
   <p>Input number of rows and number of columns for grid then click create grid or select an image below to select a start up grid</p>
-  <div main-container>
-    <div class="nav-left">
+  <div  main-container>
+    <div joyrideStep="step4" title="Option 1" text="You can select a grid to play the Game of Life..." [stepContent]="customContentGrid"  class="nav-left">
       <div class="start-grids">
         <img class="block" src="../../assets/block.png" alt="block image" (click)="this.getStartGrid('block')" />
         <img class="beacon" src="../../assets/beacon.gif" alt="beacon image" (click)="this.getStartGrid('beacon')" />
@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div class=" nav-right">
+    <div joyrideStep="step5" title="Option 2" text="...or you can create your own grid" [stepContent]="customContentCreateGrid" class=" nav-right">
       <form class="input-grid">
         <div class="form-group" [formGroup]="this.formGroup">
           <label for="row">Number of rows:</label>
@@ -46,3 +46,15 @@
     <button class="btn" id="reset-grid" type="submit" [routerLink]="['/home']">Reset</button>
   </div>
 </ng-container>
+
+<ng-template #customContentGrid>
+  <img src="../../assets/selectexistinggrid.gif" />
+  <br />
+  You can select a grid to play the Game of Life...
+</ng-template>
+
+<ng-template #customContentCreateGrid>
+  <img src="../../assets/creategrid.gif"/>
+  <br />
+  ...or you can create your own grid
+</ng-template>

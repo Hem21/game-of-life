@@ -1,5 +1,6 @@
 import { HttpClient} from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
+import { JoyrideModule, JoyrideStepComponent} from 'ngx-joyride';
 import { BackEndService, Grid } from '../services/backend.service';
 
 
@@ -7,7 +8,9 @@ import { BackEndService, Grid } from '../services/backend.service';
   selector: 'app-meteo',
   templateUrl: './meteo.component.html',
   styleUrls: ['./meteo.component.css']
+  
 })
+
 export class MeteoComponent implements OnInit {
   /* weather: Weather = new Weather();*/
   WeatherData: any;
