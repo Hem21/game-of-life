@@ -293,7 +293,9 @@ mat-sidenav-content {
   right: 1%;
   bottom: 20%;
   overflow-y: hidden;
+
 }
+
 
 .cdk-overlay-pane mat-dialog-container.mat-dialog-container img {
   vertical-align: middle;
@@ -387,3 +389,21 @@ mat-sidenav-content {
 .actions-buttons {
     width: 50%;
 }
+
+
+
+/*.arrow-outside ::ng-deep {
+  float: right;
+  top: -52px;
+  right: -52px;
+}*/
+
+/*.arrows-guide {
+  width: 50%;
+  height: 50%;
+  background-color: green;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  transform: translate(-50%, -50%);
+}*/

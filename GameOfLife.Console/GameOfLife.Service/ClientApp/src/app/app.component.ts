@@ -63,7 +63,8 @@ export class AppComponent {
   }
 
   openTutorialBox() {
-    this.dialog.open(TutorialBoxComponent);
+    this.dialog.open(TutorialBoxComponent, {
+      panelClass: 'arrow-outside' });
   }
 }
 

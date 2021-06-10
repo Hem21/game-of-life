@@ -8,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TutorialBoxComponent {
   images = [
-    { title: 'Selected grid', picture: '../assets/selectexistinggrid.gif', content: 'You can play with a grid that already exists, you need to select the grid before playing' },
+    { title: 'Welcome', picture: '../assets/creategrid.gif', content: 'Discover all the buttons in this app' },
     { id: '1', title: 'Create a grid', picture: '../assets/creategrid.gif', content: 'Enter the size of your grid to play' },
-    { id: '2',title: 'bla', picture: '../assets/creategrid.gif', content: 'blablabla' },
+    { id: '2', title: 'Selected grid', picture: '../assets/selectexistinggrid.gif', content: 'You can play with a grid that already exists, you need to select the grid before playing' },
     { id: '3',title: 'hey', picture: '../assets/creategrid.gif', content: 'hehe' },
 
   ];
